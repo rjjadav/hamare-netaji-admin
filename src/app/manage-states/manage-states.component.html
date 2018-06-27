@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-lg-2"></div>
+    <div class="col-md-10 col-lg-10">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let state of statesList">
+                  <td>{{state.name}}	</td>
+                  <td>{{state.active}}</td>
+                  <td><a href="#" style="text-decoration: none">Edit</a></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>

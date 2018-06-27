@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-lg-2"></div>
+    <div class="col-md-10 col-lg-10">
+      <div class="row">
+        <span class="col"></span>
+        <a routerLink="/add-interview">
+                      Add Interview 
+                </a>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Sequence</th>
+            <th>Youtube-Link</th>
+            <th>Active</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let interview of interviewList">
+            <td>{{interview.title}} </td>
+            <td>{{interview.description}}</td>
+            <td>{{interview.sequence}}</td>
+            <td>{{interview.youtubeLink}}</td>
+            <td>{{interview.active}}</td>
+            <td><a href="#" style="text-decoration: none">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

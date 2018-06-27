@@ -1,0 +1,129 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.head p{
+  display: block;
+  color: white;
+  background: black;
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;
+}
+
+
+.login-form {
+  width: 500px;
+  align-content: center;
+  margin: 100px auto;
+
+}
+.login-form form {
+  margin-bottom: 6vh;
+  background: #f7f7f7;
+  padding: 5vh;
+}
+.login-form h2 {
+  margin: 0 0 35px;
+}
+.form-control, .btn {
+  min-height: 38px;
+  border-radius: 8px;
+}
+.btn {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+.navbar-fixed-left {
+  width: 190px;
+  position: fixed;
+  border-radius: 0;
+  height: 100vh;
+  top: 0;
+  background: black;
+  overflow: hidden;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: left;
+  top: 70px;
+  font-size: 16px;
+}
+
+.navbar-fixed-left + .container {
+  padding-left: 160px;
+}
+
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.head{
+  width:100%;
+  background: black;
+  text-align: center;
+  line-height: 50px;
+}
+
+.head p{
+  color: white;
+  font-size: 25px;
+}
+
+/************************************* Navbar begins ***************************************/
+
+.navbar-fixed-left {
+  width: 190px;
+  position:fixed;
+  border-radius: 0;
+  height: 100vh;
+  top: 0;
+  background: black;
+  overflow: hidden;
+
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;
+  top: 70px;
+  font-size: 16px;
+}
+
+.navbar-fixed-left + .container {
+  padding-left: 160px;
+}
+/************************************* Navbar Ends ***************************************/
+
+/*************************************Registeration form begins***************************************/
+.regformhead{
+  font-size:30px;
+  line-height:50px;
+  padding:20px;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right:40px;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+  overflow:hidden;
+  background-color:white;
+}

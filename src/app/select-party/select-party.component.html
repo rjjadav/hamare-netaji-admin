@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-lg-2"></div>
+        <div class="col-md-10 col-lg-10">
+            <div [hidden]="submitted">
+                <div class="party-form">
+                    <form [formGroup]="partyForm">
+                        <!--selects is the variable that reference to ngForm that governs the form as a whole-->
+
+                        <h2 class="text-center">HamareNetaji</h2>
+                        <div class="row">
+                            <span class="col"></span>
+                            <a routerLink="/partyList">
+                                        Party List
+                                </a>
+                        </div>
+                        <h2 class="text-center" style="font-size: 20px">Select State</h2>
+
+
+                        <!--STATE NAME BEGINS-->
+                        <div class="form-group">
+                            <label for="partyname">Party Name</label>
+                            <input type="text" class="form-control" id="partyname" required="required" formControlName="name">
+                            <!-- <div *ngIf="partyName.touched">
+                                <div *ngIf="partyName.errors?.required" class="alert alert-danger">
+                                    Party name is required
+                                </div>
+                                <div *ngIf="partyName.errors?.pattern" class="alert alert-danger">
+                                    Party Name invalid
+                                </div>
+                            </div> -->
+                        </div>
+                        <!--STATE NAME ENDS-->
+
+
+                        <!--SYMBOL NAME BEGINS-->
+                        <!-- <div class="form-group">
+                            <label for="symboltext">Symbol in text</label>
+                            <input type="text" class="form-control" id="symboltext" required="required" pattern="[a-zA-Z]" [(ngModel)]="model.name" name="symbol"
+                                #symbolName="ngModel">
+                            <div *ngIf="symbolName.touched">
+                                <div *ngIf="symbolName.errors?.required" class="alert alert-danger">
+                                    Symbol text is required
+                                </div>
+                                <div *ngIf="symbolName.errors?.pattern" class="alert alert-danger">
+                                    Symbol invalid
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--SYMBOL NAME ENDS-->
+
+
+                        <!--WEBSITE NAME BEGINS-->
+                        <!-- <div class="form-group">
+                            <label for="webiste">Website</label>
+                            <input type="url" class="form-control" id="website" required="required" pattern="https?://.+" [(ngModel)]="model.name" name="webiste"
+                                #websiteName="ngModel">
+
+                            <div *ngIf="websiteName.touched">
+                                <div *ngIf="websiteName.errors?.required" class="alert alert-danger">
+                                    Website name is required
+                                </div>
+                                <div *ngIf="websiteName.errors?.pattern" class="alert alert-danger">
+                                    Website invalid
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--WEBSITE NAME ENDS-->
+
+
+                        <!--STATUS BEGINS-->
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" formControlName="active" required="required" formControlName="active" id="Status">
+                            <option>Active</option>
+                            <option>Inactive</option>
+                            </select>
+                        </div>
+                        <!--STATUS ENDS-->
+
+
+                        <div class="form-group">
+                            <button type="submit" [disabled]="!partyForm.valid" (click)="addParty(partyForm.value)" class="btn btn-success">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
