@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorage } from 'ngx-store';
+import {ToastrService} from 'ngx-toastr';
 declare var $: any;
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private user: UserService, private http: HttpClient) { }
+  constructor(private router: Router, private user: UserService, private http: HttpClient,private toastrService:ToastrService) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', JSON.stringify({ result }));
       console.log(result);
     }, error =>{
+      this.toastrService.error("Whoops! There were some problems with your input.","The selected email is invalid.");
       console.log('There was an error: ')
     });
   }
