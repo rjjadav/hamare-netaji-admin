@@ -1,0 +1,31 @@
+<div class="app-title">
+  <div>
+    <h1>States</h1>
+    <p>State List</p>
+  </div>
+
+  <a routerLink="/states" class="btn btn-outline-dark">Add State</a>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="tile">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let state of statesList">
+          <td>{{state.name}}	</td>
+          <td>{{state.active}}</td>
+          <td><a href="#" style="text-decoration: none">Edit</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="app-title">
+  <div>
+    <h1>Interviews</h1>
+    <p>Add Interview</p>
+  </div>
+
+  <a routerLink="/interviewList" class="btn btn-outline-dark">Interview List</a>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="tile">
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="interviewForm">
+            <div class="form-group">
+              <label for="title" class="col-form-label">Title:</label>
+              <input type="text" class="form-control" required="required" formControlName="title"  name="title" id="title" placeholder="Title" required>
+            </div>
+
+            <div class="form-group">
+              <label for="description" class="col-form-label">Description:</label>
+              <textarea type="text" class="form-control" name="description" id="description" required="required" formControlName="description" placeholder="Description" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="youtubeLink" class="col-form-label">Youtube Link URL:</label>
+              <input type="text" class="form-control" formControlName="youtubeLink" name="youtubeLink" id="youtubeLink" placeholder="Youtube Link" required>
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label">Thumbnail:</label>
+                <div class="input-group">
+                  <input type="file" class="form-control" id="imgInp">
+                  <input type="hidden" formControlName="thumbNailImage" class="form-control" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="sequence" class="col-form-label">Sequence:</label>
+              <input type="text" class="form-control" formControlName="sequence" name="sequence" id="sequence" placeholder="Sequence" required>
+            </div>
+
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-control" formControlName="active" required="required" formControlName="active">
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+            </div>
+
+            <div class="tile-footer">
+              <button class="btn btn-primary" (click)="addInterview(interviewForm.value)">
+                Add Interview
+              </button>
+
+              <!--<button class="btn btn-secondary ml-3">
+                Cancel
+              </button>-->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-lg-3"></div>
+
+    <div class="col-md-9 col-lg-9">
+        <div class="row">
+            <div class=" col-xs-12 xol-sm-12 col-md-9 col-lg-9">
+                <div class="row">
+                    <span class="col"></span>
+                    <a routerLink="/interviewList">
+                                Interview List
+                        </a>
+                </div>
+                <div class="regformhead"><p>Add Interview Details</p></div>
+                <form [formGroup]="interviewForm"  >
+
+
+
+                    &lt;!&ndash; Title &ndash;&gt;
+
+                    <div class="form-group row">
+                      <label for="title" class="col-sm-3 col-form-label">Title:</label>
+                      <div class="col-sm-9">
+
+                        <input type="text" class="form-control" required="required" formControlName="title"  name="title" id="title" placeholder="Title" required>
+
+                      </div>
+                    </div>
+
+                    <br>
+
+                    &lt;!&ndash; Description &ndash;&gt;
+
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-3 col-form-label">Description:</label>
+                        <div class="col-sm-9">
+
+                          <input type="text" class="form-control" name="description" id="description" required="required" formControlName="description" placeholder="Description" required>
+
+                        </div>
+                    </div>
+
+                    <br>
+
+                    &lt;!&ndash; Youtube Link &ndash;&gt;
+
+                    <div class="form-group row">
+                        <label for="youtubeLink" class="col-sm-3 col-form-label">Youtube Link URL:</label>
+                        <div class="col-sm-9">
+
+                          <input type="text" class="form-control" formControlName="youtubeLink" name="youtubeLink" id="youtubeLink" placeholder="Youtube Link" required>
+
+                        </div>
+                    </div>
+
+                    <br>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Thumbnail:</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                              <span class="input-group-btn">
+                                  <span class="btn btn-default btn-file">
+                                      Browse… <input type="file" id="imgInp">
+                                  </span>
+                              </span>
+                              <input type="text" formControlName="thumbNailImage" class="form-control" readonly>
+                            </div>
+                      </div>
+                    </div>
+
+                    <br>
+
+                    &lt;!&ndash; Sequence &ndash;&gt;
+
+                    <div class="form-group row">
+                        <label for="sequence" class="col-sm-3 col-form-label">Sequence:</label>
+                        <div class="col-sm-9">
+
+                          <input type="text" class="form-control" formControlName="sequence" name="sequence" id="sequence" placeholder="Sequence" required>
+
+                        </div>
+                    </div>
+
+                    <br>
+
+
+
+                        &lt;!&ndash; Status &ndash;&gt;
+
+                      <div class="form-group row">
+                          <label for="status" class="col-sm-3 col-form-label">Status:</label>
+                          <div class="col-sm-9">
+                          <select class="form-control" formControlName="active" id="Status" >
+                          <option>Active</option>
+                          <option>Inactive</option>
+                        </select>
+                        </div>
+                        </div>
+
+                        <br><br>
+
+                      &lt;!&ndash; Add Button &ndash;&gt;
+
+                      <div class="form-group row">
+                            <button class="btn btn-success" [disabled]="!interviewForm.valid" (click)="addInterview(interviewForm.value)" >Add</button>
+                        </div>
+               </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>>-->

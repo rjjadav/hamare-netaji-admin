@@ -1,0 +1,31 @@
+<div class="app-title">
+  <div>
+    <h1>Party</h1>
+    <p>List</p>
+  </div>
+
+  <a routerLink="/party" class="btn btn-outline-dark">Add Party</a>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="tile">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Active</th>
+          <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let party of partyList">
+          <td>{{party.name}} </td>
+          <td>{{party.active}}</td>
+          <!--<td><a href="#" style="text-decoration: none">Edit</a></td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,65 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './auth/login/login.component';
+import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { UserService } from './user.service';
-import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { SelectStateComponent } from './select-state/select-state.component';
-import { SelectPartyComponent } from './select-party/select-party.component';
-import { ManageStatesComponent } from './manage-states/manage-states.component';
-import { LeaderProfileComponent } from './leader-profile/leader-profile.component';
-import { AddInterviewComponent } from './add-interview/add-interview.component';
-import { HamareNetajiKahenComponent } from './hamare-netaji-kahen/hamare-netaji-kahen.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { StateListComponent } from './state-list/state-list.component';
+import { SelectStateComponent } from './main/select-state/select-state.component';
+import { SelectPartyComponent } from './main/select-party/select-party.component';
+import { ManageStatesComponent } from './main/manage-states/manage-states.component';
+import { LeaderProfileComponent } from './main/leader-profile/leader-profile.component';
+import { AddInterviewComponent } from './main/add-interview/add-interview.component';
+import { HamareNetajiKahenComponent } from './main/hamare-netaji-kahen/hamare-netaji-kahen.component';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { StateListComponent } from './main/state-list/state-list.component';
 import {BsDatepickerModule} from 'ngx-bootstrap';
-import {PartyListComponent} from './party-list/party-list.component';
-import {InterviewListComponent} from './interview-list/interview-list.component';
-const appRoutes:Routes = [
-  {
-  path : '',
-  component : LoginComponent
-  },
-  {
-  path : 'dashboard',
-  canActivate: [AuthGuard],
-  component : DashboardComponent
-  },
-  {
-    path : 'select-state',
-    component : SelectStateComponent
-  },
-  {
-    path : 'stateList',
-    component : StateListComponent
-  },
-  {
-    path : 'select-party',
-    component : SelectPartyComponent
-  },
-  {
-    path : 'manage-states',
-    component : ManageStatesComponent
-  },
-  {
-    path : 'leader-profile',
-    component : LeaderProfileComponent
-  },
-  {
-    path : 'add-interview',
-    component : AddInterviewComponent
-  },
-  {
-    path : 'hamare-netaji-kahen',
-    component : HamareNetajiKahenComponent
-  }
-]
+import {PartyListComponent} from './main/party-list/party-list.component';
+import {InterviewListComponent} from './main/interview-list/interview-list.component';
+import { MainComponent } from './main/main.component';
+import {routes} from './routes';
+import { AuthComponent } from './auth/auth.component';
+import {InterceptorService} from './core/config/interceptor.service';
+import {ToastrModule} from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -76,17 +43,28 @@ const appRoutes:Routes = [
     HamareNetajiKahenComponent,
     StateListComponent,
     PartyListComponent,
-    InterviewListComponent
+    InterviewListComponent,
+    MainComponent,
+    AuthComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
-    BsDatepickerModule.forRoot()
+    RouterModule.forRoot(routes,{ useHash: true }),
+    BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot()
   ],
-  providers: [UserService, AuthGuard],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
