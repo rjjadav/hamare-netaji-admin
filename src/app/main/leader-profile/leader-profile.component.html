@@ -13,17 +13,17 @@
       <div class="row">
         <div class="col-md-6">
           <form [formGroup]="profileForm">
-            <!--<div class="form-group">
+            <div class="form-group">
               <label>Photograph:</label>
                 <div class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-default btn-file">
-                                    se… <input type="file" id="imgInp">
+                                   Upload<input type="file"  ng2FileSelect  [uploader]="uploader"  (change)="onFileSelected()"   id="imgInp">
                                 </span>
                             </span>
                   <input type="text" class="form-control" readonly>
               </div>
-            </div>-->
+            </div>
 
 
 
