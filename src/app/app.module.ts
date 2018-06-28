@@ -26,7 +26,7 @@ import {routes} from './routes';
 import { AuthComponent } from './auth/auth.component';
 import {InterceptorService} from './core/config/interceptor.service';
 import {ToastrModule} from 'ngx-toastr';
-import { AuthGuard } from './_guards/auth.guard';
+import { AuthGuard } from './core/config/auth.guard';
 
 
 @NgModule({

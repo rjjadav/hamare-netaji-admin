@@ -3,19 +3,28 @@
 </div>
 
 <div class="login-box">
-  <form action="" method="post" (submit)="loginUser($event)" class="login-form">
+  <form [formGroup]="loginForm" method="post" class="login-form">
     <h3 class="login-head">Login</h3>
 
     <div class="form-group">
       <label>Email</label>
-      <input type="text" class="form-control" placeholder="Email" required="required">
+      <input type="text" class="form-control" placeholder="Email" formControlName="email">
+      <div class="form-control-feedback invalid-feedback" *ngIf="loginForm.controls['email'].touched">
+        <span *ngIf="loginForm.controls['email'].hasError('required')">Please input your Email</span>
+        <span *ngIf="loginForm.controls['email'].hasError('pattern')">Please input valid Email</span>
+      </div>
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" placeholder="Password" required="required">
+      <input type="password" class="form-control" placeholder="Password" formControlName="password">
+      <div *ngIf="loginForm.controls['password'].touched" class="form-control-feedback invalid-feedback">
+        <span *ngIf="loginForm.controls['password'].hasError('required')">Please input your Password</span>
+      </div>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      <button type="submit" class="btn btn-primary btn-block" (click)="loginUser(loginForm)" [disabled]="loading">
+        {{loading ? 'Logging In' : 'Log in'}}
+      </button>
     </div>
     <!--<div class="clearfix">
       <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>

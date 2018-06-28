@@ -1,4 +1,6 @@
 import {Routes} from '@angular/router';
+import { AuthGuard } from './core/config/auth.guard';
+
 import {MainComponent} from './main/main.component';
 import {SelectStateComponent} from './main/select-state/select-state.component';
 import {ManageStatesComponent} from './main/manage-states/manage-states.component';
@@ -11,19 +13,19 @@ import {HamareNetajiKahenComponent} from './main/hamare-netaji-kahen/hamare-neta
 import {LeaderProfileComponent} from './main/leader-profile/leader-profile.component';
 import {LoginComponent} from './auth/login/login.component';
 import {AuthComponent} from './auth/auth.component';
-import { AuthGuard } from './_guards/auth.guard';
+
 
 
 const mainRoutes: Routes = [
-  { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]  },
-  { path: 'states', component: SelectStateComponent,canActivate: [AuthGuard] },
-  { path: 'stateList', component: ManageStatesComponent ,canActivate: [AuthGuard]},
-  { path: 'party', component: SelectPartyComponent ,canActivate: [AuthGuard]},
-  { path: 'partyList', component: PartyListComponent,canActivate: [AuthGuard] },
-  { path: 'interview', component: AddInterviewComponent,canActivate: [AuthGuard] },
-  { path: 'interviewList', component: InterviewListComponent ,canActivate: [AuthGuard]},
-  { path: 'hnk', component: HamareNetajiKahenComponent ,canActivate: [AuthGuard]},
-  { path: 'profile', component: LeaderProfileComponent,canActivate: [AuthGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
+  { path: 'states', component: SelectStateComponent, canActivate: [AuthGuard] },
+  { path: 'stateList', component: ManageStatesComponent , canActivate: [AuthGuard]},
+  { path: 'party', component: SelectPartyComponent , canActivate: [AuthGuard]},
+  { path: 'partyList', component: PartyListComponent, canActivate: [AuthGuard] },
+  { path: 'interview', component: AddInterviewComponent, canActivate: [AuthGuard] },
+  { path: 'interviewList', component: InterviewListComponent , canActivate: [AuthGuard]},
+  { path: 'hnk', component: HamareNetajiKahenComponent , canActivate: [AuthGuard]},
+  { path: 'profile', component: LeaderProfileComponent, canActivate: [AuthGuard] }
 ];
 
 const authRoutes: Routes = [
