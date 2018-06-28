@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray,Validators } from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -21,13 +21,13 @@ export class LeaderProfileComponent implements OnInit {
   }
 
   addProfile(formValues) {
-    formValues['posHelds'] = [
-      {
-        from: new Date(),
-        to: new Date(),
-        held: 'asdadasd'
-      }
-    ];
+    // formValues['posHelds'] = [
+    //   {
+    //     from: new Date(),
+    //     to: new Date(),
+    //     held: 'asdadasd'
+    //   }
+    // ];
 
     this.httpClient.post('http://139.162.53.4/netaji/admin/createProfile', formValues)
       .subscribe((res) => {
@@ -87,7 +87,24 @@ export class LeaderProfileComponent implements OnInit {
       noOfBillIntroduced: [''],
       noOfDebates: [''],
       noOfSpecialMentionsMade: [''],
-      active: ['Active', Validators.required]
+      active: ['Active', Validators.required],
+      posHelds: this.formBuilder.array([this.formBuilder.group({from:null,to:null,held:''})])
     });
   }
+  get posHelds() {
+    return this.profileForm.get('posHelds') as FormArray;
+  }
+  education_fields(){
+    this.posHelds.push(this.formBuilder.group({from:null,to:null,held:''}));
+  }
+  deleteeducation_fields(index){
+    if(index>0){
+      this.posHelds.removeAt(index);
+    }     
+  }
+}
+export class posHelds {
+  from: Date
+  to: Date
+  held:string
 }

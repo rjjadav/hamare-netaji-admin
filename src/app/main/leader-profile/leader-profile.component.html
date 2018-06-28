@@ -29,13 +29,13 @@
 
             <div class="form-group">
               <label>Salutation:</label>
-                <select class="form-control" formControlName="sal"  id="salutation">
-                  <option>Mr.</option>
-                  <option>Mrs.</option>
-                  <option>Kumari.</option>
-                  <option>Dr.</option>
-                  <option>Prof.</option>
-                </select>
+              <select class="form-control" formControlName="sal" id="salutation">
+                <option>Mr.</option>
+                <option>Mrs.</option>
+                <option>Kumari.</option>
+                <option>Dr.</option>
+                <option>Prof.</option>
+              </select>
             </div>
 
 
@@ -43,9 +43,10 @@
             <!-- First Name -->
 
             <div class="form-group">
-              <label for="firstName" >First Name:</label>
+              <label for="firstName">First Name:</label>
 
-                <input type="text" class="form-control" name="firstName" id="firstName" formControlName="firstName" placeholder="First Name" required>
+              <input type="text" class="form-control" name="firstName" id="firstName" formControlName="firstName" placeholder="First Name"
+                required>
 
             </div>
 
@@ -54,8 +55,8 @@
             <!-- Middle Name -->
 
             <div class="form-group">
-              <label for="middleName" >Middle Name:</label>
-                <input type="text" class="form-control" id="middleName" formControlName="middleName" placeholder="Middle Name" >
+              <label for="middleName">Middle Name:</label>
+              <input type="text" class="form-control" id="middleName" formControlName="middleName" placeholder="Middle Name">
             </div>
 
 
@@ -63,124 +64,121 @@
             <!-- Last Name -->
 
             <div class="form-group">
-              <label for="lastName" >Last Name:</label>
-                <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
+              <label for="lastName">Last Name:</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
             </div>
 
 
-
-            <!-- Position -->
+            <!--  Post Held Chronology -->
 
             <div class="form-group">
-              <label for="position" >Position:</label>
-                <input type="text" class="form-control" id="position" formControlName="position" placeholder="Position">
-            </div>
-
-
-
-            <!-- Post Held Chronology -->
-
-            <!--<div class="form-group">
-              <label for="postHeld" >Post Held (Chronology):</label>
+              <label for="postHeld">Post Held (Chronology):</label>
               <div class="col-sm-9">
-                <div class="panel panel-default">
+                <div class="panel panel-default" formArrayName="posHelds">
 
-                  <div class="panel-body">
+                  <div class="panel-body" *ngFor="let posHelds of posHelds.controls; let pointIndex=index" [formGroupName]="pointIndex">
 
                     <div id="education_fields">
 
                     </div>
                     <div class="col-sm-4 nopadding">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="postFrom" name="From" value="" placeholder="From Date" bsDatepicker>
+                        <input type="text" class="form-control" id="postFrom" name="From" formControlName="from" placeholder="From Date" bsDatepicker>
                       </div>
                     </div>
 
                     <div class="col-sm-4 nopadding">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="postTo" name="To" value="" placeholder="To Date" bsDatepicker>
+                        <input type="text" class="form-control" id="postTo" name="To" formControlName="to" placeholder="To Date" bsDatepicker>
                       </div>
                     </div>
 
                     <div class="col-sm-4 nopadding">
                       <div class="form-group">
                         <div class="input-group">
-                          <input type="text" class="form-control" id="postHeld" name="postHeld" value="" placeholder="Post held">
-                          <div class="input-group-btn">
-                            <button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
-                          </div>
-
+                          <input type="text" class="form-control" id="postHeld" name="postHeld" value="" formControlName="held" placeholder="Post held">
                         </div>
-
                         <div class="clear"></div>
-
                       </div>
                     </div>
-
+                    <div class="col-sm-4 nopadding">
+                      <div class="form-group">
+                        <div class="input-group">
+                         
+                          <button class="btn btn-success" type="button" (click)="deleteeducation_fields(pointIndex)">
+                            Remove
+                           </button>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                    <div class="input-group-btn">
+                      <button class="btn btn-success" type="button" (click)="education_fields();">
+                       Add
+                      </button>
+                    </div>
                   </div>
 
                 </div>
               </div>
-            </div>-->
-
-
+            </div>
 
             <!-- Party/Organiasation -->
 
             <div class="form-group">
-              <label for="party-organisation" >Party/Organisation:</label>
-                <select class="form-control" formControlName="organisation"  id="party-organisation" >
-                  <option>Select Party/Organisation</option>
-                  <option>Aam Aadmi Party (AAP)</option>
-                  <option>All India Anna Dravida Munnetra Kazhagam (AIADMK)</option>
-                  <option>All India Forward Bloc (AIFB)</option>
-                  <option>All India Maljis-E-Ittehadul Muslimeen (AIMIM)</option>
-                  <option>All India Trinamool Congress (AITC)</option>
-                  <option>All India United Democratic Front (AIUDF)</option>
-                  <option>Asom Gana Parishad (AGP)</option>
-                  <option>Bahujam Samaj Party (BSP)</option>
-                  <option>Bahujan Vikas Aaghadi (BVA)</option>
-                  <option>Bharatiya Janata Party (BJP)</option>
-                  <option>Biju Janta Dal (BJD)</option>
-                  <option>Bodoland Peoples Front (BPF)</option>
-                  <option>Braj Vikas Party</option>
-                  <option>Communist Party Of India (CPI)</option>
-                  <option>Communist Party of India (Marxist-Leninist) (Liberation)</option>
-                  <option>Communist Party of India-Marxist (CPI-M)</option>
-                  <option>Dravida Munnetra Kazhagam (DMK)</option>
-                  <option>Haryana Janhit Congress-BL (HJC-BL)</option>
-                  <option>Independent (Batsman)</option>
-                  <option>Independent (Candle)</option>
-                  <option>Independent (Gas Cylinder)</option>
-                  <option>Independent (Gas Stove)</option>
-                  <option>Independent (Hockey and Ball)</option>
-                  <option>Independent (Ind.)</option>
-                  <option>Independent (Kite)</option>
-                  <option>Independent (Pot)</option>
-                  <option>Independent (Torch)</option>
-                  <option>Independent (Traditional Coat)</option>
-                  <option>Independent (Walking Stick)</option>
-                  <option>Independent (Whistle)</option>
-                  <option>Independent 9</option>
-                  <option>Indian National Congress (INC)</option>
-                  <option>Indian Union Muslim League (IUML)</option>
-                  <option>Jammu and Kashmir National Conference (J&KNC)</option>
-                  <option>Janata Dal-Secular (JD-S)</option>
-                  <option>Janata Dal-United (JD-U)</option>
-                  <option>Jharkhand Mukti Morcha (JMM)</option>
-                  <option>Jharkhand Vikas Morcha-Prajatantrik (JVM-P)</option>
-                  <option>Kerala Congress-M (KC-M)</option>
-                  <option>Marumalarchi Dravida Munnetra Kazhagam (MDMK)</option>
-                  <option>Nationalist Congress Party (NCP)</option>
-                  <option>Rashtriya Janta Dal (RJD)</option>
-                  <option>Rashtriya Lok Dal (RLD)</option>
-                  <option>Revolutionary Socialist Party (RSP)</option>
-                  <option>Samajwadi Party (SP)</option>
-                  <option>Shiromani Akali Dal (SAD)</option>
-                  <option>Shiv Sena (SS)</option>
-                  <option>Sikkim Democratic Fornt (SDF)</option>
-                  <option>Swabhimani Paksha (SWP)</option>
-                </select>
+              <label for="party-organisation">Party/Organisation:</label>
+              <select class="form-control" formControlName="organisation" id="party-organisation">
+                <option>Select Party/Organisation</option>
+                <option>Aam Aadmi Party (AAP)</option>
+                <option>All India Anna Dravida Munnetra Kazhagam (AIADMK)</option>
+                <option>All India Forward Bloc (AIFB)</option>
+                <option>All India Maljis-E-Ittehadul Muslimeen (AIMIM)</option>
+                <option>All India Trinamool Congress (AITC)</option>
+                <option>All India United Democratic Front (AIUDF)</option>
+                <option>Asom Gana Parishad (AGP)</option>
+                <option>Bahujam Samaj Party (BSP)</option>
+                <option>Bahujan Vikas Aaghadi (BVA)</option>
+                <option>Bharatiya Janata Party (BJP)</option>
+                <option>Biju Janta Dal (BJD)</option>
+                <option>Bodoland Peoples Front (BPF)</option>
+                <option>Braj Vikas Party</option>
+                <option>Communist Party Of India (CPI)</option>
+                <option>Communist Party of India (Marxist-Leninist) (Liberation)</option>
+                <option>Communist Party of India-Marxist (CPI-M)</option>
+                <option>Dravida Munnetra Kazhagam (DMK)</option>
+                <option>Haryana Janhit Congress-BL (HJC-BL)</option>
+                <option>Independent (Batsman)</option>
+                <option>Independent (Candle)</option>
+                <option>Independent (Gas Cylinder)</option>
+                <option>Independent (Gas Stove)</option>
+                <option>Independent (Hockey and Ball)</option>
+                <option>Independent (Ind.)</option>
+                <option>Independent (Kite)</option>
+                <option>Independent (Pot)</option>
+                <option>Independent (Torch)</option>
+                <option>Independent (Traditional Coat)</option>
+                <option>Independent (Walking Stick)</option>
+                <option>Independent (Whistle)</option>
+                <option>Independent 9</option>
+                <option>Indian National Congress (INC)</option>
+                <option>Indian Union Muslim League (IUML)</option>
+                <option>Jammu and Kashmir National Conference (J&KNC)</option>
+                <option>Janata Dal-Secular (JD-S)</option>
+                <option>Janata Dal-United (JD-U)</option>
+                <option>Jharkhand Mukti Morcha (JMM)</option>
+                <option>Jharkhand Vikas Morcha-Prajatantrik (JVM-P)</option>
+                <option>Kerala Congress-M (KC-M)</option>
+                <option>Marumalarchi Dravida Munnetra Kazhagam (MDMK)</option>
+                <option>Nationalist Congress Party (NCP)</option>
+                <option>Rashtriya Janta Dal (RJD)</option>
+                <option>Rashtriya Lok Dal (RLD)</option>
+                <option>Revolutionary Socialist Party (RSP)</option>
+                <option>Samajwadi Party (SP)</option>
+                <option>Shiromani Akali Dal (SAD)</option>
+                <option>Shiv Sena (SS)</option>
+                <option>Sikkim Democratic Fornt (SDF)</option>
+                <option>Swabhimani Paksha (SWP)</option>
+              </select>
             </div>
 
 
@@ -188,46 +186,46 @@
             <!-- State -->
 
             <div class="form-group">
-              <label for="state"  >State:</label>
-                <select class="form-control" formControlName="state" id="state" >
-                  <option>Select State</option>
-                  <option>Andaman and Nicobar Islands</option>
-                  <option>Andhra Pradesh</option>
-                  <option>Arunachal Pradesh	</option>
-                  <option>Assam</option>
-                  <option>Bihar</option>
-                  <option>Chandigarh</option>
-                  <option>Chhattisgarh</option>
-                  <option>Dadra and Nagar Haveli</option>
-                  <option>Daman and Diu</option>
-                  <option>Delhi</option>
-                  <option>Goa</option>
-                  <option>Gujarat</option>
-                  <option>Haryana</option>
-                  <option>Himachal Pradesh</option>
-                  <option>Jammu and Kashmir</option>
-                  <option>Jharkhand</option>
-                  <option>Karnataka</option>
-                  <option>Kerala</option>
-                  <option>Lakshadweep</option>
-                  <option>Madhya Pradesh</option>
-                  <option>Maharashtra</option>
-                  <option>Manipur</option>
-                  <option>Meghalaya</option>
-                  <option>Mizoram</option>
-                  <option>Nagaland</option>
-                  <option>Odisha</option>
-                  <option>Puducherry</option>
-                  <option>Punjab</option>
-                  <option>Rajasthan</option>
-                  <option>Sikkim</option>
-                  <option>Tamil Nadu</option>
-                  <option>Telangana</option>
-                  <option>Tripura</option>
-                  <option>Uttar Pradesh</option>
-                  <option>Uttarakhand</option>
-                  <option>West Bengal</option>
-                </select>
+              <label for="state">State:</label>
+              <select class="form-control" formControlName="state" id="state">
+                <option>Select State</option>
+                <option>Andaman and Nicobar Islands</option>
+                <option>Andhra Pradesh</option>
+                <option>Arunachal Pradesh </option>
+                <option>Assam</option>
+                <option>Bihar</option>
+                <option>Chandigarh</option>
+                <option>Chhattisgarh</option>
+                <option>Dadra and Nagar Haveli</option>
+                <option>Daman and Diu</option>
+                <option>Delhi</option>
+                <option>Goa</option>
+                <option>Gujarat</option>
+                <option>Haryana</option>
+                <option>Himachal Pradesh</option>
+                <option>Jammu and Kashmir</option>
+                <option>Jharkhand</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>Lakshadweep</option>
+                <option>Madhya Pradesh</option>
+                <option>Maharashtra</option>
+                <option>Manipur</option>
+                <option>Meghalaya</option>
+                <option>Mizoram</option>
+                <option>Nagaland</option>
+                <option>Odisha</option>
+                <option>Puducherry</option>
+                <option>Punjab</option>
+                <option>Rajasthan</option>
+                <option>Sikkim</option>
+                <option>Tamil Nadu</option>
+                <option>Telangana</option>
+                <option>Tripura</option>
+                <option>Uttar Pradesh</option>
+                <option>Uttarakhand</option>
+                <option>West Bengal</option>
+              </select>
             </div>
 
 
@@ -235,8 +233,8 @@
             <!-- Place/Area of interest -->
 
             <div class="form-group">
-              <label for="placeorarea" >Place/Area of interest:</label>
-                <input type="text" formControlName="placeOrAreaOfInterest" class="form-control" id="placeorarea" placeholder="Place/Area of interest">
+              <label for="placeorarea">Place/Area of interest:</label>
+              <input type="text" formControlName="placeOrAreaOfInterest" class="form-control" id="placeorarea" placeholder="Place/Area of interest">
             </div>
 
 
@@ -244,8 +242,8 @@
             <!-- Qualification -->
 
             <div class="form-group">
-              <label for="qualification" >Qualification:</label>
-                <input type="text" class="form-control" formControlName="qualifications" id="qualification" placeholder="Qualification">
+              <label for="qualification">Qualification:</label>
+              <input type="text" class="form-control" formControlName="qualifications" id="qualification" placeholder="Qualification">
             </div>
 
 
@@ -253,8 +251,8 @@
             <!-- Occupation -->
 
             <div class="form-group">
-              <label for="occupation" >Occupation:</label>
-                <input type="text" class="form-control" formControlName="occupation"  id="occupation" placeholder="Occupation">
+              <label for="occupation">Occupation:</label>
+              <input type="text" class="form-control" formControlName="occupation" id="occupation" placeholder="Occupation">
             </div>
 
 
@@ -262,8 +260,8 @@
             <!-- Father's name -->
 
             <div class="form-group">
-              <label for="fatherName" >Father's Name:</label>
-                <input type="text" class="form-control" formControlName="fatherName" id="fatherName" placeholder="Father's Name">
+              <label for="fatherName">Father's Name:</label>
+              <input type="text" class="form-control" formControlName="fatherName" id="fatherName" placeholder="Father's Name">
             </div>
 
 
@@ -271,8 +269,8 @@
             <!-- Mother's Name -->
 
             <div class="form-group">
-              <label for="motherName" >Mother's Name:</label>
-                <input type="text" class="form-control" formControlName="motherName" id="motherName" placeholder="Mother's Name">
+              <label for="motherName">Mother's Name:</label>
+              <input type="text" class="form-control" formControlName="motherName" id="motherName" placeholder="Mother's Name">
             </div>
 
 
@@ -280,8 +278,8 @@
             <!-- Date of Birth -->
 
             <div class="form-group">
-              <label for="dateofBirth" >Date of Birth:</label>
-                <input type="text" class="form-control" formControlName="dob" id="dateofBirth" placeholder="DD/MM/YY" bsDatepicker>
+              <label for="dateofBirth">Date of Birth:</label>
+              <input type="text" class="form-control" formControlName="dob" id="dateofBirth" placeholder="DD/MM/YY" bsDatepicker>
             </div>
 
 
@@ -289,8 +287,8 @@
             <!-- Age -->
 
             <div class="form-group">
-              <label for="age" >Age:</label>
-                <input type="number" class="form-control" formControlName="age"  id="age" placeholder="Age">
+              <label for="age">Age:</label>
+              <input type="number" class="form-control" formControlName="age" id="age" placeholder="Age">
             </div>
 
 
@@ -298,8 +296,8 @@
             <!-- Place of Birth -->
 
             <div class="form-group">
-              <label for="placeofBirth" >Place of Birth:</label>
-                <input type="text" class="form-control" formControlName="placeOfBirth" id="placeofBirth" placeholder="Place of Birth">
+              <label for="placeofBirth">Place of Birth:</label>
+              <input type="text" class="form-control" formControlName="placeOfBirth" id="placeofBirth" placeholder="Place of Birth">
             </div>
 
 
@@ -307,15 +305,15 @@
             <!-- Marital Status -->
 
             <div class="form-group">
-              <label for="maritalStatus" >Marital Status:</label>
-                <select class="form-control" formControlName="maritalStatus" id="maritalStatus" >
-                  <option>Select Marital Status</option>
-                  <option>Married</option>
-                  <option>Single</option>
-                  <option>Divorcee</option>
-                  <option>Widow</option>
-                  <option>Widower</option>
-                </select>
+              <label for="maritalStatus">Marital Status:</label>
+              <select class="form-control" formControlName="maritalStatus" id="maritalStatus">
+                <option>Select Marital Status</option>
+                <option>Married</option>
+                <option>Single</option>
+                <option>Divorcee</option>
+                <option>Widow</option>
+                <option>Widower</option>
+              </select>
             </div>
 
 
@@ -323,8 +321,8 @@
             <!-- Date of Marriage -->
 
             <div class="form-group">
-              <label for="dateofMarriage" >Date of Marriage:</label>
-                <input type="text" class="form-control" formControlName="dateOfMarriage"  id="dateofMarriage" placeholder="DD/MM/YY" bsDatepicker>
+              <label for="dateofMarriage">Date of Marriage:</label>
+              <input type="text" class="form-control" formControlName="dateOfMarriage" id="dateofMarriage" placeholder="DD/MM/YY" bsDatepicker>
             </div>
 
 
@@ -332,8 +330,8 @@
             <!-- Spouse's Name -->
 
             <div class="form-group">
-              <label for="spouseName" >Spouse's Name:</label>
-                <input type="text" class="form-control" formControlName="spouseName"  id="spouseName" placeholder="Spouse's Name">
+              <label for="spouseName">Spouse's Name:</label>
+              <input type="text" class="form-control" formControlName="spouseName" id="spouseName" placeholder="Spouse's Name">
             </div>
 
 
@@ -341,8 +339,8 @@
             <!-- Number of Children -->
 
             <div class="form-group">
-              <label for="numberofChildren" >Number of Children:</label>
-                <input type="number" class="form-control" formControlName="noOfChildren" id="numberofChildren" placeholder="Number of Children">
+              <label for="numberofChildren">Number of Children:</label>
+              <input type="number" class="form-control" formControlName="noOfChildren" id="numberofChildren" placeholder="Number of Children">
             </div>
 
 
@@ -350,8 +348,8 @@
             <!-- Date of Death (for Deceased Person) -->
 
             <div class="form-group">
-              <label for="dateofDeath" >Date of Death (for Deceased Person):</label>
-                <input type="text" class="form-control" formControlName="dateOfDeath" id="dateofDeath" placeholder="Date of Death" bsDatepicker>
+              <label for="dateofDeath">Date of Death (for Deceased Person):</label>
+              <input type="text" class="form-control" formControlName="dateOfDeath" id="dateofDeath" placeholder="Date of Death" bsDatepicker>
             </div>
 
 
@@ -360,8 +358,8 @@
 
 
             <div class="form-group">
-              <label for="numberofcriminalcases" >Number of Criminal Cases Registered:</label>
-                <input type="number" class="form-control" formControlName="noOfCriminalCases" id="numberofcriminalcases" placeholder="Number of Criminal Cases">
+              <label for="numberofcriminalcases">Number of Criminal Cases Registered:</label>
+              <input type="number" class="form-control" formControlName="noOfCriminalCases" id="numberofcriminalcases" placeholder="Number of Criminal Cases">
             </div>
 
 
@@ -370,8 +368,8 @@
 
 
             <div class="form-group">
-              <label for="presentAddress" >Present Address:</label>
-                <textarea type="text"s="3" class="form-control" formControlName="presentAddress" id="presentAddress"></textarea>
+              <label for="presentAddress">Present Address:</label>
+              <textarea type="text" s="3" class="form-control" formControlName="presentAddress" id="presentAddress"></textarea>
             </div>
 
 
@@ -379,8 +377,8 @@
             <!-- Present Address Landline Number -->
 
             <div class="form-group">
-              <label for="presentAddressLandline" >Present Address Landline Number:</label>
-                <input type="text" class="form-control" id="presentAddressLandline" formControlName="presentLandLine" placeholder="Landline number (include the country code)">
+              <label for="presentAddressLandline">Present Address Landline Number:</label>
+              <input type="text" class="form-control" id="presentAddressLandline" formControlName="presentLandLine" placeholder="Landline number (include the country code)">
             </div>
 
 
@@ -401,8 +399,8 @@
             <!-- Permanent Address Landline Number -->
 
             <div class="form-group">
-              <label for="permanentAddressLandline" >Permanent Address Landline Number:</label>
-                <input type="text" class="form-control" id="permanentAddressLandline"  placeholder="Landline number (include the country code)">
+              <label for="permanentAddressLandline">Permanent Address Landline Number:</label>
+              <input type="text" class="form-control" id="permanentAddressLandline" placeholder="Landline number (include the country code)">
             </div>
 
 
@@ -410,8 +408,8 @@
             <!-- Fax Number -->
 
             <div class="form-group">
-              <label for="faxNumber" >Fax Number:</label>
-                <input type="text" class="form-control" id="faxNumber" formControlName="faxNo" placeholder="Fax Number">
+              <label for="faxNumber">Fax Number:</label>
+              <input type="text" class="form-control" id="faxNumber" formControlName="faxNo" placeholder="Fax Number">
             </div>
 
 
@@ -419,8 +417,8 @@
             <!-- Mobile Number -->
 
             <div class="form-group">
-              <label for="mobileNumber" >Mobile Number:</label>
-                <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNo" placeholder="Mobile Number (include the country code)">
+              <label for="mobileNumber">Mobile Number:</label>
+              <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNo" placeholder="Mobile Number (include the country code)">
             </div>
 
 
@@ -428,8 +426,8 @@
             <!-- Email ID -->
 
             <div class="form-group">
-              <label for="emailId" >Email ID:</label>
-                <input type="text" class="form-control" id="emailId" formControlName="email" placeholder="Email ID">
+              <label for="emailId">Email ID:</label>
+              <input type="text" class="form-control" id="emailId" formControlName="email" placeholder="Email ID">
             </div>
 
 
@@ -437,8 +435,8 @@
             <!-- Website -->
 
             <div class="form-group">
-              <label for="website" >Website:</label>
-                <input type="text" class="form-control" id="website" formControlName="website"  placeholder="URL to the Website">
+              <label for="website">Website:</label>
+              <input type="text" class="form-control" id="website" formControlName="website" placeholder="URL to the Website">
             </div>
 
 
@@ -446,32 +444,33 @@
             <!-- Follow Me -->
 
             <div class="form-group">
-              <label >Follow Me:</label>
-                <div class="form-group">
-                  <label>Facebook Link:</label>
-                    <input type="text" class="form-control" formControlName="facebookLink" id="facebookLink" placeholder="Facebook Link">
-                </div>
-                <div class="form-group">
-                  <label >Twitter Link:</label>
-                    <input type="text" class="form-control" formControlName="twitterLink" id="twitterLinkLink" placeholder="Twitter Link">
-                </div>
-                <div class="form-group">
-                  <label for="linkdenLink" >Linkden Link:</label>
-                    <input type="text" class="form-control" formControlName="linkedinLink" id="linkdenLink" placeholder="Linkden Link">
-                </div>
-                <div class="form-group">
-                  <label for="googlePlus" >Google Plus:</label>
-                    <input type="text" class="form-control" formControlName="googlePlus" id="googlePlus" placeholder="Google Plus">
-                </div>
+              <label>Follow Me:</label>
+              <div class="form-group">
+                <label>Facebook Link:</label>
+                <input type="text" class="form-control" formControlName="facebookLink" id="facebookLink" placeholder="Facebook Link">
               </div>
+              <div class="form-group">
+                <label>Twitter Link:</label>
+                <input type="text" class="form-control" formControlName="twitterLink" id="twitterLinkLink" placeholder="Twitter Link">
+              </div>
+              <div class="form-group">
+                <label for="linkdenLink">Linkden Link:</label>
+                <input type="text" class="form-control" formControlName="linkedinLink" id="linkdenLink" placeholder="Linkden Link">
+              </div>
+              <div class="form-group">
+                <label for="googlePlus">Google Plus:</label>
+                <input type="text" class="form-control" formControlName="googlePlus" id="googlePlus" placeholder="Google Plus">
+              </div>
+            </div>
 
 
 
             <!-- Social and Cultural Activities -->
 
             <div class="form-group">
-              <label for="socialAndCultutal" >Social & Cultural Activities:</label>
-                <textarea name="socialAndCultutal" formControlName="socialAndCulturalActivities"  class="form-control" id="socialAndCultutal"></textarea><br/>
+              <label for="socialAndCultutal">Social & Cultural Activities:</label>
+              <textarea name="socialAndCultutal" formControlName="socialAndCulturalActivities" class="form-control" id="socialAndCultutal"></textarea>
+              <br/>
             </div>
 
 
@@ -479,8 +478,9 @@
             <!-- Special Interests -->
 
             <div class="form-group">
-              <label for="specialInterest" >Special Interests:</label>
-                <textarea name="specialInterest" formControlName="specialInterests"  class="form-control" id="specialInterest"></textarea><br/>
+              <label for="specialInterest">Special Interests:</label>
+              <textarea name="specialInterest" formControlName="specialInterests" class="form-control" id="specialInterest"></textarea>
+              <br/>
             </div>
 
 
@@ -489,7 +489,8 @@
 
             <div class="form-group">
               <label>Sports:</label>
-                <textarea class="form-control" formControlName="sports" name="sports"></textarea><br/>
+              <textarea class="form-control" formControlName="sports" name="sports"></textarea>
+              <br/>
             </div>
 
 
@@ -497,15 +498,17 @@
             <!-- Countries Visited -->
 
             <div class="form-group">
-              <label for="countriesVisited" >Countries Visited:</label>
-                <textarea name="countriesVisited" formControlName="countriesVisted" class="form-control" id="countriesVisited"></textarea><br/>
+              <label for="countriesVisited">Countries Visited:</label>
+              <textarea name="countriesVisited" formControlName="countriesVisted" class="form-control" id="countriesVisited"></textarea>
+              <br/>
             </div>
 
 
 
             <div class="form-group">
-              <label for="activities" >Activities:</label>
-                <textarea name="activities" class="form-control" formControlName="activities" id="activities"></textarea><br/>
+              <label for="activities">Activities:</label>
+              <textarea name="activities" class="form-control" formControlName="activities" id="activities"></textarea>
+              <br/>
             </div>
 
 
@@ -513,8 +516,9 @@
             <!-- Campaigns -->
 
             <div class="form-group">
-              <label for="campaigns" >Campaigns:</label>
-                <textarea name="campaigns" class="form-control" formControlName="campaigns" id="campaigns"></textarea><br/>
+              <label for="campaigns">Campaigns:</label>
+              <textarea name="campaigns" class="form-control" formControlName="campaigns" id="campaigns"></textarea>
+              <br/>
             </div>
 
 
@@ -522,8 +526,9 @@
             <!-- Movements -->
 
             <div class="form-group">
-              <label for="movements" >Movements:</label>
-                <textarea name="movements" class="form-control" formControlName="movements" id="movements"></textarea><br/>
+              <label for="movements">Movements:</label>
+              <textarea name="movements" class="form-control" formControlName="movements" id="movements"></textarea>
+              <br/>
             </div>
 
 
@@ -531,56 +536,56 @@
             <!-- Performance -->
 
             <div class="form-group">
-              <label >Performance:</label>
-                <div class="form-group">
-                  <label for="fundsReleased">Funds Released (in Rs):</label>
-                    <input type="text" class="form-control"   formControlName="fundReleased" id="fundsReleased" placeholder="">
-                </div>
+              <label>Performance:</label>
+              <div class="form-group">
+                <label for="fundsReleased">Funds Released (in Rs):</label>
+                <input type="text" class="form-control" formControlName="fundReleased" id="fundsReleased" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="fundsUtilised">Funds Utilised (in Rs):</label>
-                    <input type="text" class="form-control"  formControlName="fundUtilised" id="fundsUtilised" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="fundsUtilised">Funds Utilised (in Rs):</label>
+                <input type="text" class="form-control" formControlName="fundUtilised" id="fundsUtilised" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="totalRecommendedWorks">Total Recommended Works:</label>
-                    <input type="text" class="form-control" id="totalRecommendedWorks" formControlName="totalRecommendedWork" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="totalRecommendedWorks">Total Recommended Works:</label>
+                <input type="text" class="form-control" id="totalRecommendedWorks" formControlName="totalRecommendedWork" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="totalSactionedWorks">Total Sanctioned works:</label>
-                    <input type="text" class="form-control" id="totalSactionedWorks" formControlName="totalSanctionedWorks" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="totalSactionedWorks">Total Sanctioned works:</label>
+                <input type="text" class="form-control" id="totalSactionedWorks" formControlName="totalSanctionedWorks" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="attendanceInHouse">Attendance in House:</label>
-                    <input type="text" class="form-control" id="attendanceInHouse" formControlName="attendenceInHouse"  placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="attendanceInHouse">Attendance in House:</label>
+                <input type="text" class="form-control" id="attendanceInHouse" formControlName="attendenceInHouse" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="numberOfQuestionsRaised">No. of Questions raised:</label>
-                    <input type="text" class="form-control" id="numberOfQuestionsRaised" formControlName="noOfQuestionRaised" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="numberOfQuestionsRaised">No. of Questions raised:</label>
+                <input type="text" class="form-control" id="numberOfQuestionsRaised" formControlName="noOfQuestionRaised" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="assuranceByGovernment">No. of Assurances given by Government:</label>
-                    <input type="text" class="form-control" id="assuranceByGovernment" formControlName="noOfAssurancesGivenByGovernment" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="assuranceByGovernment">No. of Assurances given by Government:</label>
+                <input type="text" class="form-control" id="assuranceByGovernment" formControlName="noOfAssurancesGivenByGovernment" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="billsIntroduced">No. of Bills Introduced:</label>
-                    <input type="text" class="form-control" id="billsIntroduced"  formControlName="noOfBillIntroduced" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="billsIntroduced">No. of Bills Introduced:</label>
+                <input type="text" class="form-control" id="billsIntroduced" formControlName="noOfBillIntroduced" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="numberOfDebates">No. of Debates:</label>
-                    <input type="text" class="form-control" id="numberOfDebates" formControlName="noOfDebates" placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="numberOfDebates">No. of Debates:</label>
+                <input type="text" class="form-control" id="numberOfDebates" formControlName="noOfDebates" placeholder="">
+              </div>
 
-                <div class="form-group">
-                  <label for="specialMentionsMade">No. of Special Mentions made:</label>
-                    <input type="text" class="form-control" id="specialMentionsMade" formControlName="noOfSpecialMentionsMade"  placeholder="">
-                </div>
+              <div class="form-group">
+                <label for="specialMentionsMade">No. of Special Mentions made:</label>
+                <input type="text" class="form-control" id="specialMentionsMade" formControlName="noOfSpecialMentionsMade" placeholder="">
+              </div>
             </div>
 
 
@@ -588,11 +593,11 @@
             <!-- Status -->
 
             <div class="form-group">
-              <label for="status" >Status:</label>
-                <select class="form-control" formControlName="active"  id="Status" >
-                  <option>Active</option>
-                  <option>Inactive</option>
-                </select>
+              <label for="status">Status:</label>
+              <select class="form-control" formControlName="active" id="Status">
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
             </div>
 
 
