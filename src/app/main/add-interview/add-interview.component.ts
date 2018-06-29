@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-interview',
@@ -24,18 +24,26 @@ export class AddInterviewComponent implements OnInit {
     this.interviewForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      youtubeLink: ['', Validators.required],
-      thumbNailImage: ['', Validators.required],
+      youtubeLink: ['',Validators.compose([Validators.required,Validators.pattern('^(https?:\/\/)?((w{3}\.)?)youtube.com\/.*$')])],
+      thumbNailImage: [''],
       sequence: ['', Validators.required],
-      active: [null, Validators.required]
+      active: ['Active', Validators.required]
     });
   }
-  addInterview(formValues) {
-    this.httpClient.post('http://139.162.53.4/netaji/admin/addInterview', formValues)
-      .subscribe((res) => {
-        this.toastrService.success('Interview added Successfully', 'Success');
-
-      });
+  addInterview(interviewForm) {
+    if (!interviewForm.valid) {
+      Object.keys(interviewForm.controls).forEach(field => {
+        const control = interviewForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      })
+    } else {
+      this.httpClient.post('http://139.162.53.4/netaji/admin/addInterview', interviewForm.value)
+        .subscribe((res) => {
+          this.toastrService.success('Interview added Successfully', 'Success');
+        },(error)=>{
+          this.toastrService.error('please try after sometime', 'Failure');
+        });
+    }
   }
 
 }

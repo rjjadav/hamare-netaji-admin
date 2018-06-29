@@ -16,16 +16,26 @@
             <div class="form-group">
               <label for="title" class="col-form-label">Title:</label>
               <input type="text" class="form-control" required="required" formControlName="title"  name="title" id="title" placeholder="Title" required>
+              <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['title'].touched">
+                <span *ngIf="interviewForm.controls['title'].hasError('required')">Please input title</span>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="description" class="col-form-label">Description:</label>
               <textarea type="text" class="form-control" name="description" id="description" required="required" formControlName="description" placeholder="Description" required></textarea>
+              <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['description'].touched">
+                <span *ngIf="interviewForm.controls['description'].hasError('required')">Please input description</span>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="youtubeLink" class="col-form-label">Youtube Link URL:</label>
-              <input type="text" class="form-control" formControlName="youtubeLink" name="youtubeLink" id="youtubeLink" placeholder="Youtube Link" required>
+              <input type="text" class="form-control"  name="youtubeLink"  formControlName="youtubeLink" id="youtubeLink" placeholder="Youtube Link" required>
+              <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['youtubeLink'].touched">
+                <span *ngIf="interviewForm.controls['youtubeLink'].hasError('pattern')">Please input valid youtube link</span>
+                <span *ngIf="interviewForm.controls['youtubeLink'].hasError('required')">Please input youtube link</span>
+              </div>
             </div>
 
             <div class="form-group">
@@ -39,6 +49,9 @@
             <div class="form-group">
               <label for="sequence" class="col-form-label">Sequence:</label>
               <input type="text" class="form-control" formControlName="sequence" name="sequence" id="sequence" placeholder="Sequence" required>
+              <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['sequence'].touched">
+                <span *ngIf="interviewForm.controls['sequence'].hasError('required')">Please input Sequence</span>
+              </div>
             </div>
 
             <div class="form-group">
@@ -47,10 +60,13 @@
                 <option>Active</option>
                 <option>Inactive</option>
               </select>
+              <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['active'].touched">
+                <span *ngIf="interviewForm.controls['active'].hasError('required')">Please input Status</span>
+              </div>
             </div>
 
             <div class="tile-footer">
-              <button class="btn btn-primary" (click)="addInterview(interviewForm.value)">
+              <button class="btn btn-primary" (click)="addInterview(interviewForm)">
                 Add Interview
               </button>
 
