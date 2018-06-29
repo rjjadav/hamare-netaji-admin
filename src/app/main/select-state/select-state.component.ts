@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class SelectStateComponent implements OnInit {
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initStateForm();
@@ -32,17 +32,26 @@ export class SelectStateComponent implements OnInit {
       name: ['', Validators.required],
       lat: ['', Validators.required],
       lon: ['', Validators.required],
-      active: ['', Validators.required]
+      active: ['Active', Validators.required]
     });
   }
 
-  addState(formValues) {
-    this.httpClient.post('http://139.162.53.4/netaji/admin/addState', formValues)
-      .subscribe((res) => {
-        console.log(res);
-        // alert(res['message']);
-        this.toastrService.success('State added Successfully', 'Success');
-      });
+  addState(stateForm) {
+    if (!stateForm.valid) {
+      Object.keys(stateForm.controls).forEach(field => {
+        const control = stateForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      })
+    } else {
+      this.httpClient.post('http://139.162.53.4/netaji/admin/addState', stateForm.value)
+        .subscribe((res) => {
+          console.log(res);
+          // alert(res['message']);
+          this.toastrService.success('State added Successfully', 'Success');
+        }, error => {
+          this.toastrService.error('please try after sometime', 'Failure');
+        });
+    }
   }
 
   /*onSubmit() {
