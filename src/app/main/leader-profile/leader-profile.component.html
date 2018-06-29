@@ -36,6 +36,9 @@
                 <option>Dr.</option>
                 <option>Prof.</option>
               </select>
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['sal'].touched">
+                <span *ngIf="profileForm.controls['sal'].hasError('required')">Please select one value</span>
+              </div>
             </div>
 
 
@@ -47,7 +50,9 @@
 
               <input type="text" class="form-control" name="firstName" id="firstName" formControlName="firstName" placeholder="First Name"
                 required>
-
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['firstName'].touched">
+                  <span *ngIf="profileForm.controls['firstName'].hasError('required')">Please input your first Name</span>
+                </div>
             </div>
 
 
@@ -66,6 +71,9 @@
             <div class="form-group">
               <label for="lastName">Last Name:</label>
               <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['lastName'].touched">
+                <span *ngIf="profileForm.controls['lastName'].hasError('required')">Please input your last Name</span>
+              </div>
             </div>
 
 
@@ -179,6 +187,9 @@
                 <option>Sikkim Democratic Fornt (SDF)</option>
                 <option>Swabhimani Paksha (SWP)</option>
               </select>
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['organisation'].touched">
+                <span *ngIf="profileForm.controls['organisation'].hasError('required')">Please select your State party</span>
+              </div>
             </div>
 
 
@@ -226,6 +237,9 @@
                 <option>Uttarakhand</option>
                 <option>West Bengal</option>
               </select>
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['state'].touched">
+                <span *ngIf="profileForm.controls['state'].hasError('required')">Please input your State </span>
+              </div>
             </div>
 
 
@@ -235,6 +249,9 @@
             <div class="form-group">
               <label for="placeorarea">Place/Area of interest:</label>
               <input type="text" formControlName="placeOrAreaOfInterest" class="form-control" id="placeorarea" placeholder="Place/Area of interest">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['placeOrAreaOfInterest'].touched">
+                <span *ngIf="profileForm.controls['placeOrAreaOfInterest'].hasError('required')">Please input your place or area Of interest</span>
+              </div>
             </div>
 
 
@@ -280,6 +297,9 @@
             <div class="form-group">
               <label for="dateofBirth">Date of Birth:</label>
               <input type="text" class="form-control" formControlName="dob" id="dateofBirth" placeholder="DD/MM/YY" bsDatepicker>
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['dob'].touched">
+                <span *ngIf="profileForm.controls['dob'].hasError('required')">Please input your date of birth</span>
+              </div>
             </div>
 
 
@@ -289,6 +309,9 @@
             <div class="form-group">
               <label for="age">Age:</label>
               <input type="number" class="form-control" formControlName="age" id="age" placeholder="Age">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['age'].touched">
+                <span *ngIf="profileForm.controls['age'].hasError('required')">Please input your age</span>
+              </div>
             </div>
 
 
@@ -298,6 +321,9 @@
             <div class="form-group">
               <label for="placeofBirth">Place of Birth:</label>
               <input type="text" class="form-control" formControlName="placeOfBirth" id="placeofBirth" placeholder="Place of Birth">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['placeOfBirth'].touched">
+                <span *ngIf="profileForm.controls['placeOfBirth'].hasError('required')">Please input your place of birth</span>
+              </div>
             </div>
 
 
@@ -419,6 +445,9 @@
             <div class="form-group">
               <label for="mobileNumber">Mobile Number:</label>
               <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNo" placeholder="Mobile Number (include the country code)">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['mobileNo'].touched">
+                <span *ngIf="profileForm.controls['mobileNo'].hasError('pattern')">Please input valid mobile number</span>
+              </div>
             </div>
 
 
@@ -428,6 +457,9 @@
             <div class="form-group">
               <label for="emailId">Email ID:</label>
               <input type="text" class="form-control" id="emailId" formControlName="email" placeholder="Email ID">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['email'].touched">
+                <span *ngIf="profileForm.controls['email'].hasError('pattern')">Please input valid Email</span>
+              </div>
             </div>
 
 
@@ -437,6 +469,9 @@
             <div class="form-group">
               <label for="website">Website:</label>
               <input type="text" class="form-control" id="website" formControlName="website" placeholder="URL to the Website">
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['website'].touched">
+                <span *ngIf="profileForm.controls['website'].hasError('pattern')">Please input valid URL</span>
+              </div>
             </div>
 
 
@@ -448,18 +483,30 @@
               <div class="form-group">
                 <label>Facebook Link:</label>
                 <input type="text" class="form-control" formControlName="facebookLink" id="facebookLink" placeholder="Facebook Link">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['facebookLink'].touched">
+                  <span *ngIf="profileForm.controls['facebookLink'].hasError('pattern')">Please input valid Facebook link</span>
+                </div>
               </div>
               <div class="form-group">
                 <label>Twitter Link:</label>
                 <input type="text" class="form-control" formControlName="twitterLink" id="twitterLinkLink" placeholder="Twitter Link">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['twitterLink'].touched">
+                  <span *ngIf="profileForm.controls['twitterLink'].hasError('pattern')">Please input valid Twitter link</span>
+                </div>
               </div>
               <div class="form-group">
                 <label for="linkdenLink">Linkden Link:</label>
                 <input type="text" class="form-control" formControlName="linkedinLink" id="linkdenLink" placeholder="Linkden Link">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['linkedinLink'].touched">
+                  <span *ngIf="profileForm.controls['linkedinLink'].hasError('pattern')">Please input valid Linkden link</span>
+                </div>
               </div>
               <div class="form-group">
                 <label for="googlePlus">Google Plus:</label>
                 <input type="text" class="form-control" formControlName="googlePlus" id="googlePlus" placeholder="Google Plus">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['googlePlus'].touched">
+                  <span *ngIf="profileForm.controls['googlePlus'].hasError('pattern')">Please input valid Google Plus link</span>
+                </div>
               </div>
             </div>
 
@@ -540,51 +587,81 @@
               <div class="form-group">
                 <label for="fundsReleased">Funds Released (in Rs):</label>
                 <input type="text" class="form-control" formControlName="fundReleased" id="fundsReleased" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['fundReleased'].touched">
+                  <span *ngIf="profileForm.controls['fundReleased'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="fundsUtilised">Funds Utilised (in Rs):</label>
                 <input type="text" class="form-control" formControlName="fundUtilised" id="fundsUtilised" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['fundUtilised'].touched">
+                  <span *ngIf="profileForm.controls['fundUtilised'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="totalRecommendedWorks">Total Recommended Works:</label>
                 <input type="text" class="form-control" id="totalRecommendedWorks" formControlName="totalRecommendedWork" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['totalRecommendedWork'].touched">
+                  <span *ngIf="profileForm.controls['totalRecommendedWork'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="totalSactionedWorks">Total Sanctioned works:</label>
                 <input type="text" class="form-control" id="totalSactionedWorks" formControlName="totalSanctionedWorks" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['totalSanctionedWorks'].touched">
+                  <span *ngIf="profileForm.controls['totalSanctionedWorks'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="attendanceInHouse">Attendance in House:</label>
                 <input type="text" class="form-control" id="attendanceInHouse" formControlName="attendenceInHouse" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['attendenceInHouse'].touched">
+                  <span *ngIf="profileForm.controls['attendenceInHouse'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="numberOfQuestionsRaised">No. of Questions raised:</label>
                 <input type="text" class="form-control" id="numberOfQuestionsRaised" formControlName="noOfQuestionRaised" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['noOfQuestionRaised'].touched">
+                  <span *ngIf="profileForm.controls['noOfQuestionRaised'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="assuranceByGovernment">No. of Assurances given by Government:</label>
                 <input type="text" class="form-control" id="assuranceByGovernment" formControlName="noOfAssurancesGivenByGovernment" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['noOfAssurancesGivenByGovernment'].touched">
+                  <span *ngIf="profileForm.controls['noOfAssurancesGivenByGovernment'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="billsIntroduced">No. of Bills Introduced:</label>
                 <input type="text" class="form-control" id="billsIntroduced" formControlName="noOfBillIntroduced" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['noOfBillIntroduced'].touched">
+                  <span *ngIf="profileForm.controls['noOfBillIntroduced'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="numberOfDebates">No. of Debates:</label>
                 <input type="text" class="form-control" id="numberOfDebates" formControlName="noOfDebates" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['noOfDebates'].touched">
+                  <span *ngIf="profileForm.controls['noOfDebates'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="specialMentionsMade">No. of Special Mentions made:</label>
                 <input type="text" class="form-control" id="specialMentionsMade" formControlName="noOfSpecialMentionsMade" placeholder="">
+                <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['noOfSpecialMentionsMade'].touched">
+                  <span *ngIf="profileForm.controls['noOfSpecialMentionsMade'].hasError('pattern')"> Enter valid number </span>
+                </div>
               </div>
             </div>
 
@@ -598,6 +675,9 @@
                 <option>Active</option>
                 <option>Inactive</option>
               </select>
+              <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['active'].touched">
+                <span *ngIf="profileForm.controls['active'].hasError('required')">Please select status</span>
+              </div>
             </div>
 
 
@@ -609,7 +689,7 @@
             </div>-->
 
             <div class="tile-footer">
-              <button class="btn btn-primary" (click)="addProfile(profileForm.value)">
+              <button class="btn btn-primary" (click)="addProfile(profileForm)">
                 Add Profile
               </button>
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
+import { error } from 'util';
 
 @Component({
   selector: 'app-leader-profile',
@@ -24,20 +25,23 @@ export class LeaderProfileComponent implements OnInit {
     this.initProfileForm();
   }
 
-  addProfile(formValues) {
-    // formValues['posHelds'] = [
-    //   {
-    //     from: new Date(),
-    //     to: new Date(),
-    //     held: 'asdadasd'
-    //   }
-    // ];
-
-    this.httpClient.post('http://139.162.53.4/netaji/admin/createProfile', formValues)
+  addProfile(profileForm) {
+   
+    if (!profileForm.valid) {
+      Object.keys(profileForm.controls).forEach(field => {
+        const control = profileForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+        console.log(control.status + "::" +field);
+      })
+    } else {
+    this.httpClient.post('http://139.162.53.4/netaji/admin/createProfile', profileForm.value)
       .subscribe((res) => {
         // console.log(res);
         this.toastrService.success('Profile added Successfully', 'Success');
+      },error=>{
+        this.toastrService.error('please try after sometime', 'Failure');
       });
+    }
   }
   onFileSelected() {
     let file= this.uploader.queue[this.uploader.queue.length-1]['file']['rawFile'];
@@ -46,11 +50,12 @@ export class LeaderProfileComponent implements OnInit {
 
   initProfileForm() {
     this.profileForm = this.formBuilder.group({
-      sal: ['', Validators.required],
+      sal: [null, Validators.required],
       firstName: ['', Validators.required],
       middleName: ['', Validators.required],
       lastName: ['', Validators.required],
-      position: ['', Validators.required],
+      // position: ['', Validators.required], field is commented
+      position: [null],
       organisation: ['', Validators.required],
       age: [18, Validators.required],
       state: ['', Validators.required],
@@ -60,7 +65,7 @@ export class LeaderProfileComponent implements OnInit {
       fatherName: [],
       motherName: [],
       dob: [new Date(), Validators.required],
-      placeOfBirth: ['', Validators.required],
+      placeOfBirth: [new Date(), Validators.required],
       maritalStatus: [''],
       spouseName: [''],
       dateOfMarriage: [''],
@@ -72,13 +77,13 @@ export class LeaderProfileComponent implements OnInit {
       // permanentAddress:[],
       permanentAddressLandLine: [''],
       faxNo: [''],
-      mobileNo: [''],
-      email: [''],
-      website: [''],
-      facebookLink: [''],
-      twitterLink: [''],
-      linkedinLink: [''],
-      googlePlus: [''],
+      mobileNo: [null,Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      email: [null,Validators.pattern('[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}')],
+      website: [null,Validators.pattern('^(http|https)?(://)?(www|ftp)?.?[a-z0-9-]+(.|:)([a-z0-9-]+)+([/?].*)?$')],
+      facebookLink: [null,Validators.pattern('^(https?:\/\/)?((w{3}\.)?)facebook\.com\/(#!\/)?[a-z0-9_]+$')],
+      twitterLink: [null,Validators.pattern('^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$')],
+      linkedinLink: [null,Validators.pattern('^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$')],
+      googlePlus: [null,Validators.pattern('^https:\/\/plus.google\.com\/.*$')],
       socialAndCulturalActivities: [''],
       specialInterests: [''],
       sports: [''],
@@ -86,16 +91,16 @@ export class LeaderProfileComponent implements OnInit {
       activities: [''],
       campaigns: [''],
       movements: [''],
-      fundReleased: [''],
-      fundUtilised: [''],
-      totalRecommendedWork: [''],
-      totalSanctionedWorks: [''],
-      attendenceInHouse: [''],
-      noOfQuestionRaised: [''],
-      noOfAssurancesGivenByGovernment: [''],
-      noOfBillIntroduced: [''],
-      noOfDebates: [''],
-      noOfSpecialMentionsMade: [''],
+      fundReleased: [null,Validators.pattern('^[0-9]*$')],
+      fundUtilised: [null,Validators.pattern('^[0-9]*$')],
+      totalRecommendedWork: [null,Validators.pattern('^[0-9]*$')],
+      totalSanctionedWorks: [null,Validators.pattern('^[0-9]*$')],
+      attendenceInHouse: [null,Validators.pattern('^[0-9]*$')],
+      noOfQuestionRaised: [null,Validators.pattern('^[0-9]*$')],
+      noOfAssurancesGivenByGovernment: [null,Validators.pattern('^[0-9]*$')],
+      noOfBillIntroduced: [null,Validators.pattern('^[0-9]*$')],
+      noOfDebates: [null,Validators.pattern('^[0-9]*$')],
+      noOfSpecialMentionsMade: [null,Validators.pattern('^[0-9]*$')],
       active: ['Active', Validators.required],
       posHelds: this.formBuilder.array([this.formBuilder.group({from:null,to:null,held:''})])
     });
