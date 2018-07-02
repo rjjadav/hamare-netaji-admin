@@ -30,11 +30,11 @@
           <td>{{interview.active}}</td>
           <td>
             <a class="btn btn-outline-info" [routerLink] = "['/interview', interview.id]">
-              <i class="fa fa-pencil" style="font-size: 18px"></i>
+              <i class="fa fa-pencil" style="font-size: 18px"  ></i>
             </a>
 
             <button class="btn btn-outline-danger ml-1">
-              <i class="fa fa-trash" style="font-size: 18px"></i>
+              <i class="fa fa-trash" style="font-size: 18px" (click)="deleteInterview(interview.id)" ></i>
             </button>
           </td>
         </tr>
