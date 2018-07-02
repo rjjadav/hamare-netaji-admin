@@ -16,6 +16,7 @@ export class LeaderListComponent implements OnInit {
   leaderList;
   constructor(
     private httpClient: HttpClient,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -33,6 +34,18 @@ export class LeaderListComponent implements OnInit {
         this.leaderList = res['profiles'];
         
       });
+  }
+  deleteLeader(id) {
+    var result = confirm("Do you really want to delete?");
+    if (result) {
+      this.httpClient.get('http://139.162.53.4/netaji/admin/deleteProfile?id=' + id)
+        .subscribe((res) => {
+          this.toastrService.success('Leader deleted Successfully', 'Failure');
+          this.getLeader();
+        }, (error) => {
+          this.toastrService.error('Failure deleing Leader', 'Failure');
+        });
+    }
   }
 }
   
