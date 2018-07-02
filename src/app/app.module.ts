@@ -27,6 +27,7 @@ import {InterceptorService} from './core/config/interceptor.service';
 import {ToastrModule} from 'ngx-toastr';
 import { AuthGuard } from './core/config/auth.guard';
 import {FileUploadModule} from 'ng2-file-upload';
+import{LeaderListComponent} from './main/leader-list/leader-list.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {FileUploadModule} from 'ng2-file-upload';
     PartyListComponent,
     InterviewListComponent,
     MainComponent,
-    AuthComponent
+    AuthComponent,
+    LeaderListComponent
   ],
   imports: [
     HttpClientModule,

@@ -11,6 +11,7 @@ import {AddInterviewComponent} from './main/add-interview/add-interview.componen
 import {InterviewListComponent} from './main/interview-list/interview-list.component';
 import {HamareNetajiKahenComponent} from './main/hamare-netaji-kahen/hamare-netaji-kahen.component';
 import {LeaderProfileComponent} from './main/leader-profile/leader-profile.component';
+import{LeaderListComponent} from './main/leader-list/leader-list.component';
 import {LoginComponent} from './auth/login/login.component';
 import {AuthComponent} from './auth/auth.component';
 
@@ -31,7 +32,9 @@ const mainRoutes: Routes = [
   { path: 'interviewList', component: InterviewListComponent , canActivate: [AuthGuard]},
 
   { path: 'hnk', component: HamareNetajiKahenComponent , canActivate: [AuthGuard]},
-  { path: 'profile', component: LeaderProfileComponent, canActivate: [AuthGuard] }
+  { path: 'profile', component: LeaderProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id', component: LeaderProfileComponent, canActivate: [AuthGuard] },
+  { path: 'leaderlist', component: LeaderListComponent, canActivate: [AuthGuard] }
 ];
 
 const authRoutes: Routes = [

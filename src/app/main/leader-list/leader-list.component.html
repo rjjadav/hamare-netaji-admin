@@ -1,0 +1,45 @@
+<div class="app-title">
+    <div>
+      <h1>Leaders</h1>
+      <p>Leader List</p>
+    </div>
+  
+    <a routerLink="/profile" class="btn btn-outline-dark">Add Leader</a>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position </th>
+            <th>Organisation</th>
+            <th>State</th>
+            <th>Active</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let leader of leaderList">
+            <td>{{leader.profileDetails.firstName}} {{leader.profileDetails.lastName}} </td>
+            <td>{{leader.profileDetails.position }}</td>
+            <td>{{leader.profileDetails.organisation}}</td>
+            <td>{{leader.profileDetails.state}}</td>
+            <td>{{leader.profileDetails.active}}</td>
+            <td>
+              <a class="btn btn-outline-info" [routerLink] = "['/profile', leader.id]">
+                <i class="fa fa-pencil" style="font-size: 18px"></i>
+              </a>
+  
+              <button class="btn btn-outline-danger ml-1">
+                <i class="fa fa-trash" style="font-size: 18px"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
