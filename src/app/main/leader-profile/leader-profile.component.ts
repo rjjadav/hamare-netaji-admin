@@ -12,7 +12,7 @@ import { error } from 'util';
 })
 
 export class LeaderProfileComponent implements OnInit {
- 
+
   profileForm: FormGroup;
   uploader = new FileUploader({ itemAlias: 'photo'});
   constructor(
@@ -26,12 +26,11 @@ export class LeaderProfileComponent implements OnInit {
   }
 
   addProfile(profileForm) {
-   
+
     if (!profileForm.valid) {
       Object.keys(profileForm.controls).forEach(field => {
         const control = profileForm.get(field);
         control.markAsTouched({ onlySelf: true });
-        console.log(control.status + "::" +field);
       })
     } else {
     this.httpClient.post('http://139.162.53.4/netaji/admin/createProfile', profileForm.value)
@@ -39,7 +38,7 @@ export class LeaderProfileComponent implements OnInit {
         // console.log(res);
         this.toastrService.success('Profile added Successfully', 'Success');
       },error=>{
-        this.toastrService.error('please try after sometime', 'Failure');
+        this.toastrService.error('Failure adding Profile', 'Failure');
       });
     }
   }
@@ -108,13 +107,16 @@ export class LeaderProfileComponent implements OnInit {
   get posHelds() {
     return this.profileForm.get('posHelds') as FormArray;
   }
-  education_fields(){
+
+  addPosition(){
     this.posHelds.push(this.formBuilder.group({from:null,to:null,held:''}));
+
   }
-  deleteeducation_fields(index){
+
+  deletePosition(index){
     if(index>0){
       this.posHelds.removeAt(index);
-    }     
+    }
   }
 }
 export class posHelds {

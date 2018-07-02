@@ -19,11 +19,17 @@ import {AuthComponent} from './auth/auth.component';
 const mainRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
   { path: 'states', component: SelectStateComponent, canActivate: [AuthGuard] },
+  { path: 'states/:id', component: SelectStateComponent, canActivate: [AuthGuard] },
   { path: 'stateList', component: ManageStatesComponent , canActivate: [AuthGuard]},
+
   { path: 'party', component: SelectPartyComponent , canActivate: [AuthGuard]},
+  { path: 'party/:id', component: SelectPartyComponent , canActivate: [AuthGuard]},
   { path: 'partyList', component: PartyListComponent, canActivate: [AuthGuard] },
+
   { path: 'interview', component: AddInterviewComponent, canActivate: [AuthGuard] },
+  { path: 'interview/:id', component: AddInterviewComponent, canActivate: [AuthGuard] },
   { path: 'interviewList', component: InterviewListComponent , canActivate: [AuthGuard]},
+
   { path: 'hnk', component: HamareNetajiKahenComponent , canActivate: [AuthGuard]},
   { path: 'profile', component: LeaderProfileComponent, canActivate: [AuthGuard] }
 ];

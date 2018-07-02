@@ -49,8 +49,8 @@
             </div>
 
             <div class="tile-footer">
-              <button class="btn btn-primary" (click)="addState(stateForm)">
-                Add State
+              <button class="btn btn-primary" (click)="addState(stateForm)" [disabled]="loading">
+                {{loading ? 'Adding State' : 'Add State'}}
               </button>
 
               <!--<button class="btn btn-secondary ml-3">

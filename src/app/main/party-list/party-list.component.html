@@ -22,7 +22,15 @@
         <tr *ngFor="let party of partyList">
           <td>{{party.name}} </td>
           <td>{{party.active}}</td>
-          <!--<td><a href="#" style="text-decoration: none">Edit</a></td>-->
+          <td>
+            <a class="btn btn-outline-info" [routerLink]="['/party',party.id]">
+              <i class="fa fa-pencil fs-18"></i>
+            </a>
+
+            <button class="btn btn-outline-danger ml-1">
+              <i class="fa fa-trash fs-18"></i>
+            </button>
+          </td>
         </tr>
         </tbody>
       </table>

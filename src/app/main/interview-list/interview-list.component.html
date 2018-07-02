@@ -18,7 +18,7 @@
           <th>Sequence</th>
           <th>Youtube-Link</th>
           <th>Active</th>
-          <th>Edit</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,15 @@
           <td>{{interview.sequence}}</td>
           <td>{{interview.youtubeLink}}</td>
           <td>{{interview.active}}</td>
-          <td><a href="#" style="text-decoration: none">Edit</a></td>
+          <td>
+            <a class="btn btn-outline-info" [routerLink] = "['/interview', interview.id]">
+              <i class="fa fa-pencil" style="font-size: 18px"></i>
+            </a>
+
+            <button class="btn btn-outline-danger ml-1">
+              <i class="fa fa-trash" style="font-size: 18px"></i>
+            </button>
+          </td>
         </tr>
         </tbody>
       </table>

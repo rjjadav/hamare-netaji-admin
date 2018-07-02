@@ -41,8 +41,11 @@
             <div class="form-group">
               <label class="col-form-label">Thumbnail:</label>
                 <div class="input-group">
-                  <input type="file" class="form-control" id="imgInp">
-                  <input type="hidden" formControlName="thumbNailImage" class="form-control" readonly>
+                  <input type="file" class="form-control" ng2FileSelect [uploader]="uploader" (change)="onFileSelected()">
+                  <!--<input type="hidden" formControlName="thumbNailImage" class="form-control" readonly>-->
+                  <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['youtubeLink'].touched">
+                    <span *ngIf="interviewForm.controls['thumbNailImage'].hasError('required')">Please select Thumbnail Image</span>
+                  </div>
                 </div>
             </div>
 
@@ -66,8 +69,8 @@
             </div>
 
             <div class="tile-footer">
-              <button class="btn btn-primary" (click)="addInterview(interviewForm)">
-                Add Interview
+              <button class="btn btn-primary" (click)="addInterview(interviewForm)" [disabled]="loading">
+                {{loading ? 'Adding Interview' : 'Add Interview'}}
               </button>
 
               <!--<button class="btn btn-secondary ml-3">

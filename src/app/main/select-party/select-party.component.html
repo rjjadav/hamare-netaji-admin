@@ -33,13 +33,9 @@
                         </div>
 
                         <div class="tile-footer">
-                            <button class="btn btn-primary" (click)="addParty(partyForm)">
-                                Add Party
+                            <button class="btn btn-primary" (click)="addParty(partyForm)" [disabled]="loading">
+                                {{(loading ? 'Adding Party' : 'Add Party')}}
                             </button>
-
-                            <!--<button class="btn btn-secondary ml-3">
-                  Cancel
-                </button>-->
                         </div>
                     </form>
                 </div>

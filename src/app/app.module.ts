@@ -7,7 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
-import { UserService } from './user.service';
+import { UserService } from './core/services/user.service';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SelectStateComponent } from './main/select-state/select-state.component';
@@ -17,7 +17,6 @@ import { LeaderProfileComponent } from './main/leader-profile/leader-profile.com
 import { AddInterviewComponent } from './main/add-interview/add-interview.component';
 import { HamareNetajiKahenComponent } from './main/hamare-netaji-kahen/hamare-netaji-kahen.component';
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { StateListComponent } from './main/state-list/state-list.component';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import {PartyListComponent} from './main/party-list/party-list.component';
 import {InterviewListComponent} from './main/interview-list/interview-list.component';
@@ -43,7 +42,6 @@ import {FileUploadModule} from 'ng2-file-upload';
     LeaderProfileComponent,
     AddInterviewComponent,
     HamareNetajiKahenComponent,
-    StateListComponent,
     PartyListComponent,
     InterviewListComponent,
     MainComponent,
