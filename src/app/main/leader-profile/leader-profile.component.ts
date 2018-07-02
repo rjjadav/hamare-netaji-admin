@@ -39,6 +39,12 @@ export class LeaderProfileComponent implements OnInit {
             if (res && res['profiles'].length) {
               this.idExist = true;
               this.profileData = res['profiles'][0];
+              if(this.profileData.profileDetails.posHelds.length>0){
+                for(var i=0;i<this.profileData.profileDetails.posHelds.length;i++){
+                  this.profileData.profileDetails.posHelds[i].from=new Date(this.profileData.profileDetails.posHelds[i].from);
+                  this.profileData.profileDetails.posHelds[i].to=new Date(this.profileData.profileDetails.posHelds[i].to)
+                }
+              }
               this.profileForm.patchValue({
                 sal: this.profileData.profileDetails.sal,
                 firstName: this.profileData.profileDetails.firstName,
@@ -91,8 +97,9 @@ export class LeaderProfileComponent implements OnInit {
                 noOfDebates: this.profileData.profileDetails.noOfDebates,
                 noOfSpecialMentionsMade: this.profileData.profileDetails.noOfSpecialMentionsMade,
                 active: this.profileData.profileDetails.active,
-                posHelds: this.profileData.profileDetails.posHelds
+                posHelds:this.profileData.profileDetails.posHelds
               });
+              
             };
           }
           )
@@ -123,7 +130,7 @@ export class LeaderProfileComponent implements OnInit {
   updateLeader(profileForm) {
     let formValue = profileForm.value;
     formValue.id = this.profileData.id;
-   
+    formValue.active =  this.profileData.active;
     this.httpClient.post('http://139.162.53.4/netaji/admin/editProfile', formValue)
       .subscribe((res) => {
         this.toastrService.success('Profile updated Successfully', 'Success');
@@ -209,7 +216,10 @@ export class LeaderProfileComponent implements OnInit {
     this.posHelds.push(this.formBuilder.group({ from: null, to: null, held: '' }));
 
   }
+  addPositionByget(obj) {
+    this.posHelds.push(this.formBuilder.group(obj));
 
+  }
   deletePosition(index) {
     if (index > 0) {
       this.posHelds.removeAt(index);
