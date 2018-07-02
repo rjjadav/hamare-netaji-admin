@@ -34,7 +34,7 @@ export class InterviewListComponent implements OnInit {
     if (result) {
       this.httpClient.get('http://139.162.53.4/netaji/admin/deleteInterview?id='+id)
       .subscribe((res) => {
-        this.toastrService.success('Interview deleted Successfully', 'Failure');
+        this.toastrService.success('Interview deleted Successfully', 'Success');
        this.getInterview();
       },(error)=>{
       this.toastrService.error('Failure deleing Interview', 'Failure');

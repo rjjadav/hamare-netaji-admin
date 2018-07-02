@@ -24,7 +24,7 @@
           <td>{{state.active}}</td>
           <td>
             <a class="btn btn-outline-info fs-18" [routerLink]="['/states', state.id]"><i class="fa fa-pencil"></i></a>
-            <button class="btn btn-outline-danger fs-18 ml-1">
+            <button class="btn btn-outline-danger fs-18 ml-1" (click)="deleteState(state.id)">
               <i class="fa fa-trash"></i>
             </button>
           </td>

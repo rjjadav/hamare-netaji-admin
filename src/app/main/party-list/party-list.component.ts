@@ -34,7 +34,7 @@ export class PartyListComponent implements OnInit {
     if (result) {
       this.httpClient.get('http://139.162.53.4/netaji/admin/deleteParties?id=' + id)
         .subscribe((res) => {
-          this.toastrService.success('Party deleted Successfully', 'Failure');
+          this.toastrService.success('Party deleted Successfully', 'Success');
           this.getParty();
         }, (error) => {
           this.toastrService.error('Failure deleing Party', 'Failure');

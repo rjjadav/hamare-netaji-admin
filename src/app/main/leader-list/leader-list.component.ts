@@ -40,7 +40,7 @@ export class LeaderListComponent implements OnInit {
     if (result) {
       this.httpClient.get('http://139.162.53.4/netaji/admin/deleteProfile?id=' + id)
         .subscribe((res) => {
-          this.toastrService.success('Leader deleted Successfully', 'Failure');
+          this.toastrService.success('Leader deleted Successfully', 'Success');
           this.getLeader();
         }, (error) => {
           this.toastrService.error('Failure deleing Leader', 'Failure');
