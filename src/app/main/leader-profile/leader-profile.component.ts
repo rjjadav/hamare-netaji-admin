@@ -131,7 +131,12 @@ export class LeaderProfileComponent implements OnInit {
     let formValue = profileForm.value;
     formValue.id = this.profileData.id;
     formValue.active =  this.profileData.active;
-    this.httpClient.post('http://139.162.53.4/netaji/admin/editProfile', formValue)
+    let  reqesrobj={
+      profileDetails:formValue,
+      id:this.profileData.id,
+      active :  this.profileData.active
+    }
+    this.httpClient.post('http://139.162.53.4/netaji/admin/editProfile', reqesrobj)
       .subscribe((res) => {
         this.toastrService.success('Profile updated Successfully', 'Success');
        
