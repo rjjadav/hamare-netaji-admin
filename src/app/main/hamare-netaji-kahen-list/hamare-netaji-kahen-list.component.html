@@ -1,0 +1,44 @@
+<div class="app-title">
+  <div>
+    <h1>Hamare Netaji Kahain</h1>
+    <p>Hamare Netaji Kahain List</p>
+  </div>
+
+  <a routerLink="/hnk" class="btn btn-outline-dark">Add Statement</a>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="tile">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Descriptions</th>
+           
+            <th>Leader's Name</th>
+            <th>Active</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let statement of statementList">
+            <td>{{statement.title}}  </td>
+            <td>{{statement.descriptions}} </td>
+            <td>{{statement.leadersName}}</td>
+            <td>{{statement.active}}</td>
+            <td>
+              <a class="btn btn-outline-info" [routerLink]="['/hnk', statement.id]">
+                <i class="fa fa-pencil" style="font-size: 18px"></i>
+              </a>
+
+              <button class="btn btn-outline-danger ml-1 " (click)="deleteStatement(statement.id)">
+                <i class="fa fa-trash" style="font-size: 18px"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

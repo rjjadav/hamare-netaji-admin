@@ -28,7 +28,7 @@ import {ToastrModule} from 'ngx-toastr';
 import { AuthGuard } from './core/config/auth.guard';
 import {FileUploadModule} from 'ng2-file-upload';
 import{LeaderListComponent} from './main/leader-list/leader-list.component';
-
+import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/hamare-netaji-kahen-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import{LeaderListComponent} from './main/leader-list/leader-list.component';
     InterviewListComponent,
     MainComponent,
     AuthComponent,
-    LeaderListComponent
+    LeaderListComponent,
+    HamareNetajiKahenListComponent
   ],
   imports: [
     HttpClientModule,

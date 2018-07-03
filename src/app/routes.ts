@@ -14,6 +14,7 @@ import {LeaderProfileComponent} from './main/leader-profile/leader-profile.compo
 import{LeaderListComponent} from './main/leader-list/leader-list.component';
 import {LoginComponent} from './auth/login/login.component';
 import {AuthComponent} from './auth/auth.component';
+import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/hamare-netaji-kahen-list.component';
 
 
 
@@ -32,6 +33,8 @@ const mainRoutes: Routes = [
   { path: 'interviewList', component: InterviewListComponent , canActivate: [AuthGuard]},
 
   { path: 'hnk', component: HamareNetajiKahenComponent , canActivate: [AuthGuard]},
+  { path: 'hnk/:id', component: HamareNetajiKahenComponent , canActivate: [AuthGuard]},
+  { path: 'hnklist', component: HamareNetajiKahenListComponent , canActivate: [AuthGuard]},
   { path: 'profile', component: LeaderProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id', component: LeaderProfileComponent, canActivate: [AuthGuard] },
   { path: 'leaderlist', component: LeaderListComponent, canActivate: [AuthGuard] }
