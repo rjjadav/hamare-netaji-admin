@@ -39,10 +39,10 @@ export class LeaderProfileComponent implements OnInit {
             if (res && res['profiles'].length) {
               this.idExist = true;
               this.profileData = res['profiles'][0];
-              if(this.profileData.profileDetails.posHelds.length>0){
-                for(var i=0;i<this.profileData.profileDetails.posHelds.length;i++){
-                  this.profileData.profileDetails.posHelds[i].from=new Date(this.profileData.profileDetails.posHelds[i].from);
-                  this.profileData.profileDetails.posHelds[i].to=new Date(this.profileData.profileDetails.posHelds[i].to)
+              if (this.profileData.profileDetails.posHelds.length > 0) {
+                for (var i = 0; i < this.profileData.profileDetails.posHelds.length; i++) {
+                  this.profileData.profileDetails.posHelds[i].from = new Date(this.profileData.profileDetails.posHelds[i].from);
+                  this.profileData.profileDetails.posHelds[i].to = new Date(this.profileData.profileDetails.posHelds[i].to)
                 }
               }
               this.profileForm.patchValue({
@@ -63,7 +63,7 @@ export class LeaderProfileComponent implements OnInit {
                 placeOfBirth: this.profileData.profileDetails.placeOfBirth,
                 maritalStatus: this.profileData.profileDetails.maritalStatus,
                 spouseName: this.profileData.profileDetails.spouseName,
-                dateOfMarriage:  new Date(this.profileData.profileDetails.dateOfMarriage),
+                dateOfMarriage: new Date(this.profileData.profileDetails.dateOfMarriage),
                 noOfChildren: this.profileData.profileDetails.noOfChildren,
                 dateOfDeath: new Date(this.profileData.profileDetails.dateOfDeath),
                 noOfCriminalCases: this.profileData.profileDetails.noOfCriminalCases,
@@ -97,9 +97,9 @@ export class LeaderProfileComponent implements OnInit {
                 noOfDebates: this.profileData.profileDetails.noOfDebates,
                 noOfSpecialMentionsMade: this.profileData.profileDetails.noOfSpecialMentionsMade,
                 active: this.profileData.profileDetails.active,
-                posHelds:this.profileData.profileDetails.posHelds
+                posHelds: this.profileData.profileDetails.posHelds
               });
-              
+
             };
           }
           )
@@ -129,20 +129,20 @@ export class LeaderProfileComponent implements OnInit {
   }
   updateLeader(profileForm) {
     let formValue = profileForm.value;
-    let requestOBJ={
-      "profile":{
-        "profileDetails":formValue,
-        "id":this.profileData.id,
-       "active" :  this.profileData.active
+    let requestOBJ = {
+      "profile": {
+        "profileDetails": formValue,
+        "id": this.profileData.id,
+        "active": this.profileData.active
       }
     }
     this.httpClient.post('http://139.162.53.4/netaji/admin/editProfile', requestOBJ)
       .subscribe((res) => {
         this.toastrService.success('Profile updated Successfully', 'Success');
-       
-      },(error)=>{
+
+      }, (error) => {
         this.toastrService.error('Failure updating Profile', 'Failure');
-      
+
       });
   }
 
@@ -216,7 +216,29 @@ export class LeaderProfileComponent implements OnInit {
   get posHelds() {
     return this.profileForm.get('posHelds') as FormArray;
   }
+  agecalculate(temp) {
 
+    let dateString = this.profileForm.value.dob.toString();
+    let birthYear = new Date(dateString);
+    var now = new Date();
+
+    var nowMonth = now.getUTCMonth() + 1; //months from 1-12
+    var nowDay = now.getUTCDate();
+    var nowYear = now.getUTCFullYear();
+
+    var myMonth_birth = birthYear.getUTCMonth();
+    var myDay_birth = birthYear.getUTCDate();
+    var myYear_birth = birthYear.getUTCFullYear();
+
+    var birthAge = nowYear - myYear_birth - 1;//not ur age yet
+
+    if (nowMonth >= myMonth_birth) //means ur birth month is now or passed
+      if (nowDay >= myDay_birth)//check if the day is now or passed
+        birthAge += 1;
+    const age = this.profileForm.get('age');
+    age.setValue(birthAge);
+
+  }
   addPosition() {
     this.posHelds.push(this.formBuilder.group({ from: null, to: null, held: '' }));
 

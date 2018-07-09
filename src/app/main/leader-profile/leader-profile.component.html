@@ -318,7 +318,7 @@
 
             <div class="form-group">
               <label for="dateofBirth">Date of Birth:</label>
-              <input type="text" class="form-control" formControlName="dob" id="dateofBirth" placeholder="DD/MM/YY" bsDatepicker>
+              <input type="text" class="form-control" formControlName="dob" (ngModelChange)="agecalculate($event)" id="dateofBirth" placeholder="DD/MM/YY" bsDatepicker>
               <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['dob'].touched">
                 <span *ngIf="profileForm.controls['dob'].hasError('required')">Please input your date of birth</span>
               </div>
@@ -330,7 +330,7 @@
 
             <div class="form-group">
               <label for="age">Age:</label>
-              <input type="number" class="form-control" formControlName="age" id="age" placeholder="Age">
+              <input type="number" class="form-control" formControlName="age" id="age" placeholder="Age" disabled >
               <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['age'].touched">
                 <span *ngIf="profileForm.controls['age'].hasError('required')">Please input your age</span>
               </div>
