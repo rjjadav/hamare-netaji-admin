@@ -71,8 +71,9 @@ export class HamareNetajiKahenComponent implements OnInit {
     var requestobj=hnkForm.value;    
     requestobj.createdOn=this.statementData.createdOn;
     requestobj.id=this.statementData.id;
+    requestobj.active = requestobj.active === 'Active' ? true : false;
 
-    this.httpClient.post('http://139.162.53.4/netaji/admin/addHumareNetajiKahein', requestobj)
+    this.httpClient.post('http://139.162.53.4/netaji/admin/editHumareNetajiKahein', requestobj)
     .subscribe((res) => {
       this.toastrService.success('Statement added Successfully', 'Success');
      

@@ -17,7 +17,7 @@ export class LeaderProfileComponent implements OnInit {
   profileForm: FormGroup;
   idExist = false;
   profileData;
-  uploader = new FileUploader({ itemAlias: 'photo' });
+  uploader: FileUploader = new FileUploader({url: ''});
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
@@ -29,6 +29,28 @@ export class LeaderProfileComponent implements OnInit {
     this.initProfileForm();
     this.getProfile();
   }
+
+  onFileSelected() {
+    if (this.uploader.queue.length) {
+      let file = this.uploader.queue[this.uploader.queue.length - 1];
+      console.log(file);
+      let fileReader = new FileReader();
+
+      fileReader.onload = (e) => {
+        let imageData = fileReader.result;
+        // console.log(imageData);
+        if (imageData.length) {
+          this.profileForm.patchValue({
+            profilePic: imageData.split(',')[1]
+          });
+        }
+      }
+      fileReader.readAsDataURL(file._file);
+
+
+    }
+  }
+
   getProfile() {
     this.activatedRoute.params.subscribe((params) => {
       if (params['id']) {
@@ -124,9 +146,7 @@ export class LeaderProfileComponent implements OnInit {
 
     }
   }
-  onFileSelected() {
-    let file = this.uploader.queue[this.uploader.queue.length - 1]['file']['rawFile'];
-  }
+
   updateLeader(profileForm) {
     let formValue = profileForm.value;
     let requestOBJ = {
@@ -158,6 +178,7 @@ export class LeaderProfileComponent implements OnInit {
 
   initProfileForm() {
     this.profileForm = this.formBuilder.group({
+      profilePic: [null],
       sal: [null, Validators.required],
       firstName: ['', Validators.required],
       middleName: ['', Validators.required],
@@ -173,7 +194,7 @@ export class LeaderProfileComponent implements OnInit {
       fatherName: [],
       motherName: [],
       dob: [new Date(), Validators.required],
-      placeOfBirth: [new Date(), Validators.required],
+      placeOfBirth: ['', Validators.required],
       maritalStatus: [''],
       spouseName: [''],
       dateOfMarriage: [''],
