@@ -135,7 +135,6 @@ export class LeaderProfileComponent implements OnInit {
       Object.keys(profileForm.controls).forEach(field => {
         const control = profileForm.get(field);
         control.markAsTouched({ onlySelf: true });
-        console.log(field + ":" + control.status)
       })
     } else {
       if (this.idExist) {
@@ -159,17 +158,22 @@ export class LeaderProfileComponent implements OnInit {
     this.httpClient.post('http://139.162.53.4/netaji/admin/editProfile', requestOBJ)
       .subscribe((res) => {
         this.toastrService.success('Profile updated Successfully', 'Success');
-
+        this.initProfileForm();
       }, (error) => {
         this.toastrService.error('Failure updating Profile', 'Failure');
 
       });
   }
 
+  resetform(){
+
+  }
+
   createLeader(profileForm) {
     this.httpClient.post('http://139.162.53.4/netaji/admin/createProfile', profileForm.value)
       .subscribe((res) => {
         // console.log(res);
+        this.initProfileForm();
         this.toastrService.success('Profile added Successfully', 'Success');
       }, error => {
         this.toastrService.error('Failure adding Profile', 'Failure');
@@ -181,12 +185,12 @@ export class LeaderProfileComponent implements OnInit {
       profilePic: [null],
       sal: [null, Validators.required],
       firstName: ['', Validators.required],
-      middleName: ['', Validators.required],
+      middleName: [null],
       lastName: ['', Validators.required],
       // position: ['', Validators.required], field is commented
       position: [null],
       organisation: ['', Validators.required],
-      age: [18, Validators.required],
+      age: [0, Validators.required],
       state: ['', Validators.required],
       placeOrAreaOfInterest: ['', Validators.required],
       qualifications: [],
@@ -198,9 +202,9 @@ export class LeaderProfileComponent implements OnInit {
       maritalStatus: [''],
       spouseName: [''],
       dateOfMarriage: [''],
-      noOfChildren: [''],
+      noOfChildren: [null,Validators.min(0)],
       dateOfDeath: [null],
-      noOfCriminalCases: [null],
+      noOfCriminalCases: [null,Validators.min(0)],
       presentAddress: [''],
       presentLandLine: [''],
       // permanentAddress:[],
@@ -209,7 +213,7 @@ export class LeaderProfileComponent implements OnInit {
       mobileNo: [null, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       email: [null, Validators.pattern('[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}')],
       website: [null, Validators.pattern('^(http|https)?(://)?(www|ftp)?.?[a-z0-9-]+(.|:)([a-z0-9-]+)+([/?].*)?$')],
-      facebookLink: [null, Validators.pattern('^(https?:\/\/)?((w{3}\.)?)facebook\.com\/(#!\/)?[a-z0-9_]+$')],
+      facebookLink: [null, Validators.pattern('^(https?:\/\/)?((w{3}\.)?)facebook.com\/(#!\/)?[a-z0-9_.]+$')],
       twitterLink: [null, Validators.pattern('^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$')],
       linkedinLink: [null, Validators.pattern('^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$')],
       googlePlus: [null, Validators.pattern('^https:\/\/plus.google\.com\/.*$')],
@@ -238,27 +242,30 @@ export class LeaderProfileComponent implements OnInit {
     return this.profileForm.get('posHelds') as FormArray;
   }
   agecalculate(temp) {
-
-    let dateString = this.profileForm.value.dob.toString();
-    let birthYear = new Date(dateString);
-    var now = new Date();
-
-    var nowMonth = now.getUTCMonth() + 1; //months from 1-12
-    var nowDay = now.getUTCDate();
-    var nowYear = now.getUTCFullYear();
-
-    var myMonth_birth = birthYear.getUTCMonth();
-    var myDay_birth = birthYear.getUTCDate();
-    var myYear_birth = birthYear.getUTCFullYear();
-
-    var birthAge = nowYear - myYear_birth - 1;//not ur age yet
-
-    if (nowMonth >= myMonth_birth) //means ur birth month is now or passed
-      if (nowDay >= myDay_birth)//check if the day is now or passed
-        birthAge += 1;
-    const age = this.profileForm.get('age');
-    age.setValue(birthAge);
-
+    if (this.profileForm.value.dob != null){
+      let dateString = this.profileForm.value.dob.toString();
+      let birthYear = new Date(dateString);
+      var now = new Date();
+  
+      var nowMonth = now.getUTCMonth() + 1; //months from 1-12
+      var nowDay = now.getUTCDate();
+      var nowYear = now.getUTCFullYear();
+  
+      var myMonth_birth = birthYear.getUTCMonth();
+      var myDay_birth = birthYear.getUTCDate();
+      var myYear_birth = birthYear.getUTCFullYear();
+  
+      var birthAge = nowYear - myYear_birth - 1;//not ur age yet
+  
+      if (nowMonth >= myMonth_birth) //means ur birth month is now or passed
+        if (nowDay >= myDay_birth)//check if the day is now or passed
+          birthAge += 1;
+      const age = this.profileForm.get('age');
+      age.setValue(birthAge);
+    }else{
+      const age = this.profileForm.get('age');
+      age.setValue(0);
+    }   
   }
   addPosition() {
     this.posHelds.push(this.formBuilder.group({ from: null, to: null, held: '' }));

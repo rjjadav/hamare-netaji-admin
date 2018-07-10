@@ -331,7 +331,7 @@
 
             <div class="form-group">
               <label for="dateofBirth">Date of Birth:</label>
-              <input type="text" class="form-control" formControlName="dob" (ngModelChange)="agecalculate($event)" id="dateofBirth" placeholder="DD/MM/YY" bsDatepicker>
+              <input type="text" class="form-control" formControlName="dob" (ngModelChange)="agecalculate($event)" id="dateofBirth" placeholder="MM/DD/YY" bsDatepicker>
               <div class="form-control-feedback invalid-feedback" *ngIf="profileForm.controls['dob'].touched">
                 <span *ngIf="profileForm.controls['dob'].hasError('required')">Please input your date of birth</span>
               </div>
@@ -383,7 +383,7 @@
 
             <div class="form-group">
               <label for="dateofMarriage">Date of Marriage:</label>
-              <input type="text" class="form-control" formControlName="dateOfMarriage" id="dateofMarriage" placeholder="DD/MM/YY" bsDatepicker>
+              <input type="text" class="form-control" formControlName="dateOfMarriage" id="dateofMarriage" placeholder="MM/DD/YY" bsDatepicker>
             </div>
 
 
@@ -401,7 +401,7 @@
 
             <div class="form-group">
               <label for="numberofChildren">Number of Children:</label>
-              <input type="number" class="form-control" formControlName="noOfChildren" id="numberofChildren" placeholder="Number of Children">
+              <input type="number" class="form-control" min="0" formControlName="noOfChildren" id="numberofChildren" placeholder="Number of Children">
             </div>
 
 
@@ -420,7 +420,7 @@
 
             <div class="form-group">
               <label for="numberofcriminalcases">Number of Criminal Cases Registered:</label>
-              <input type="number" class="form-control" formControlName="noOfCriminalCases" id="numberofcriminalcases" placeholder="Number of Criminal Cases">
+              <input type="number" class="form-control"  min="0" formControlName="noOfCriminalCases" id="numberofcriminalcases" placeholder="Number of Criminal Cases">
             </div>
 
 

@@ -51,7 +51,7 @@
 
             <div class="form-group">
               <label for="sequence" class="col-form-label">Sequence:</label>
-              <input type="text" class="form-control" formControlName="sequence" name="sequence" id="sequence" placeholder="Sequence" required>
+              <input type="number" class="form-control" formControlName="sequence" name="sequence" id="sequence" placeholder="Sequence" required>
               <div class="form-control-feedback invalid-feedback" *ngIf="interviewForm.controls['sequence'].touched">
                 <span *ngIf="interviewForm.controls['sequence'].hasError('required')">Please input Sequence</span>
               </div>

@@ -35,7 +35,7 @@ export class AddInterviewComponent implements OnInit {
       // youtubeLink: ['',Validators.compose([Validators.required,Validators.pattern('^(https?://)?(www\\\\.)?([-a-z0-9]{1,63}\\\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\\\.[a-z]{2,6}(/[-\\\\w@\\\\+\\\\.~#\\\\?&/=%]*)?$')])],
       youtubeLink: ['',Validators.compose([Validators.required,Validators.pattern('^(https?:\/\/)?((w{3}\.)?)youtube.com\/.*$')])],
       thumbNailImage: ['', Validators.required],
-      sequence: ['', Validators.required],
+      sequence: [null, Validators.required],
       active: ['Active', Validators.required]
     });
   }
