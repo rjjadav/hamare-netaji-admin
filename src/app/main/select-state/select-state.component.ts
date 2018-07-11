@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { StateService } from '../../core/services/state.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class SelectStateComponent implements OnInit {
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private stateService: StateService,
   ) { }
 
   ngOnInit() {
@@ -43,13 +45,13 @@ export class SelectStateComponent implements OnInit {
   }
 
   getState() {
-    this.activatedRoute.params.subscribe( (params) => {
-      if(params['id']) {
-        this.httpClient.get(`http://139.162.53.4/netaji/admin/getStates?id=${params['id']}`)
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.stateService.getStateService(params['id'])
           .subscribe((res) => {
-            if(res && res['states'].length){
+            if (res && res.body.states.length) {
               this.idExist = true;
-              this.stateData= res['states'][0];
+              this.stateData = res.body.states[0];
               this.stateForm.patchValue({
                 name: this.stateData.name,
                 lat: this.stateData.lat,
@@ -69,9 +71,9 @@ export class SelectStateComponent implements OnInit {
         control.markAsTouched({ onlySelf: true });
       })
     } else {
-      if(this.idExist) {
+      if (this.idExist) {
         this.editState(stateForm);
-      }else {
+      } else {
         this.createState(stateForm);
       }
     }
@@ -79,16 +81,15 @@ export class SelectStateComponent implements OnInit {
 
   createState(stateForm) {
     this.loading = true;
-    this.httpClient.post('http://139.162.53.4/netaji/admin/addState', stateForm.value)
-    .subscribe((res) => {
-      console.log(res);
-      // alert(res['message']);
-      this.toastrService.success('State added Successfully', 'Success');
-      this.loading = false;
-    }, error => {
-      this.toastrService.error('Failure adding State', 'Failure');
-      this.loading = false;
-    });
+    this.stateService.createStateService(stateForm.value)
+      .subscribe((res) => {
+        console.log(res);
+        this.toastrService.success('State added Successfully', 'Success');
+        this.loading = false;
+      }, error => {
+        this.toastrService.error('Failure adding State', 'Failure');
+        this.loading = false;
+      });
   }
 
   editState(stateForm) {
@@ -96,8 +97,8 @@ export class SelectStateComponent implements OnInit {
     let formValue = stateForm.value;
     formValue.id = this.stateData.id;
     // formValue.createdOn = this.stateData.createdOn;
-    formValue.active  = stateForm.value.active.toLowerCase() === 'active';
-    this.httpClient.post('http://139.162.53.4/netaji/admin/editState', formValue)
+    formValue.active = stateForm.value.active.toLowerCase() === 'active';
+    this.stateService.editStateService(formValue)
       .subscribe((res) => {
         this.toastrService.success('State updated Successfully', 'Success');
         this.loading = false;

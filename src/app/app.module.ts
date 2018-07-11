@@ -29,6 +29,7 @@ import { AuthGuard } from './core/config/auth.guard';
 import {FileUploadModule} from 'ng2-file-upload';
 import{LeaderListComponent} from './main/leader-list/leader-list.component';
 import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/hamare-netaji-kahen-list.component';
+import { StateService } from './core/services/state.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/ha
       multi: true
     },
     AuthGuard,
-    UserService
+    UserService,
+    StateService
   ],
   bootstrap: [AppComponent]
 })

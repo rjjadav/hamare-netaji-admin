@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { StateService } from '../../core/services/state.service';
 
 @Component({
   selector: 'app-manage-states',
@@ -13,6 +14,7 @@ export class ManageStatesComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private toastrService: ToastrService,
+    private stateService: StateService
   ) { }
 
   ngOnInit() {
@@ -20,22 +22,22 @@ export class ManageStatesComponent implements OnInit {
   }
 
   getStates() {
-    this.httpClient.get('http://139.162.53.4/netaji/admin/getStates')
+    this.stateService.stateListService()
       .subscribe((res) => {
-        console.log(res);
-        this.statesList = res['states'];
+
+        this.statesList = res.body["states"];
       });
   }
   deleteState(id) {
     var result = confirm("Do you really want to delete?");
     if (result) {
-      this.httpClient.get('http://139.162.53.4/netaji/admin/deleteState?id='+id)
-      .subscribe((res) => {
-        this.toastrService.success('State deleted Successfully', 'Success');
-       this.getStates();
-      },(error)=>{
-      this.toastrService.error('Failure deleing State', 'Failure');
-      });
+      this.stateService.deleteStateService(id)
+        .subscribe((res) => {
+          this.toastrService.success('State deleted Successfully', 'Success');
+          this.getStates();
+        }, (error) => {
+          this.toastrService.error('Failure deleing State', 'Failure');
+        });
     }
   }
 }
