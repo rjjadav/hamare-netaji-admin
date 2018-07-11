@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { PartyService } from '../../core/services/party.service';
+
 @Component({
   selector: 'app-party-list',
   templateUrl: './party-list.component.html',
@@ -12,6 +14,7 @@ export class PartyListComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private toastrService: ToastrService,
+    private partyService: PartyService
   ) { }
 
   ngOnInit() {
@@ -23,16 +26,15 @@ export class PartyListComponent implements OnInit {
     let options = {
       'headers': headers
     }*/
-    this.httpClient.get('http://139.162.53.4/netaji/admin/getParties')
+    this.partyService.listPartyService()
       .subscribe((res) => {
-        console.log(res);
-        this.partyList = res['parties'];
+        this.partyList = res.body['parties'];
       });
   }
   deleteParty(id) {
     var result = confirm("Do you really want to delete?");
     if (result) {
-      this.httpClient.get('http://139.162.53.4/netaji/admin/deleteParties?id=' + id)
+      this.partyService.deletePartyService(id)
         .subscribe((res) => {
           this.toastrService.success('Party deleted Successfully', 'Success');
           this.getParty();

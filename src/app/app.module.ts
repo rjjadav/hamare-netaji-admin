@@ -32,6 +32,7 @@ import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/ha
 import { StateService } from './core/services/state.service';
 import { InterviewService } from './core/services/interview.service';
 import { StatementService } from './core/services/statement.service';
+import { PartyService } from './core/services/party.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { StatementService } from './core/services/statement.service';
     UserService,
     StateService,
     InterviewService,
-    StatementService
+    StatementService,
+    PartyService
   ],
   bootstrap: [AppComponent]
 })

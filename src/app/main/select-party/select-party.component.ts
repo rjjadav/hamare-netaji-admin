@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { PartyService } from '../../core/services/party.service';
 
 
 @Component({
@@ -14,15 +15,16 @@ export class SelectPartyComponent implements OnInit {
   partyForm: FormGroup;
   status = ['Active', 'Inactive'];
   submitted = false;
-  idExist= false;
-  loading:boolean = false;
+  idExist = false;
+  loading: boolean = false;
   partyData;
 
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private partyService: PartyService
   ) { }
 
   ngOnInit() {
@@ -37,14 +39,14 @@ export class SelectPartyComponent implements OnInit {
     })
   }
 
-  getParty(){
+  getParty() {
     this.activatedRoute.params.subscribe((params) => {
-      if(params['id']){
-        this.httpClient.get(`http://139.162.53.4/netaji/admin/getParties?id=${params['id']}`)
+      if (params['id']) {
+        this.partyService.getPartyByIDService(params['id'])
           .subscribe((res) => {
-            if(res && res['parties'].length) {
+            if (res && res.body['parties'].length) {
               this.idExist = true;
-              this.partyData = res['parties'][0];
+              this.partyData = res.body['parties'][0];
               this.partyForm.patchValue({
                 name: this.partyData.name,
                 active: this.partyData.active ? 'Active' : 'Inactive'
@@ -62,9 +64,9 @@ export class SelectPartyComponent implements OnInit {
         control.markAsTouched({ onlySelf: true });
       })
     } else {
-      if(this.idExist){
+      if (this.idExist) {
         this.editParty(partyForm);
-      }else {
+      } else {
         this.createParty(partyForm);
       }
     }
@@ -72,7 +74,7 @@ export class SelectPartyComponent implements OnInit {
 
   createParty(partyForm) {
     this.loading = true;
-    this.httpClient.post('http://139.162.53.4/netaji/admin/addParty', partyForm.value)
+    this.partyService.createPartyService(partyForm.value)
       .subscribe((res) => {
         this.toastrService.success('Party added Successfully', 'Success');
         this.loading = false;
@@ -86,13 +88,13 @@ export class SelectPartyComponent implements OnInit {
     this.loading = true;
     let formData = partyForm.value;
     formData.id = this.partyData.id;
-    this.httpClient.post('http://139.162.53.4/netaji/admin/editParty', formData)
-    .subscribe((res) => {
-      this.toastrService.success('Party updated Successfully', 'Success');
-      this.loading = false;
-    }, error => {
-      this.toastrService.error('Failure updating Party', 'Failure');
-      this.loading = false;
-    });
+    this.partyService.editPartyService(formData)
+      .subscribe((res) => {
+        this.toastrService.success('Party updated Successfully', 'Success');
+        this.loading = false;
+      }, error => {
+        this.toastrService.error('Failure updating Party', 'Failure');
+        this.loading = false;
+      });
   }
 }
