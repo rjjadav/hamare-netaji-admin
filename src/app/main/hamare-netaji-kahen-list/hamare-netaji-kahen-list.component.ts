@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { error } from 'util';
+import { StatementService } from '../../core/services/statement.service';
+StatementService
 
 @Component({
   selector: 'app-hamare-netaji-kahen',
@@ -13,7 +15,8 @@ import { error } from 'util';
 export class HamareNetajiKahenListComponent implements OnInit {
   statementList;
   constructor(private httpClient: HttpClient,
-    private toastrService: ToastrService,) { }
+    private toastrService: ToastrService,
+    private statementService: StatementService) { }
 
   ngOnInit() {
     this.getStatements();
@@ -24,17 +27,17 @@ export class HamareNetajiKahenListComponent implements OnInit {
     let options = {
       'headers': headers
     }*/
-    this.httpClient.get('http://139.162.53.4/netaji/admin/getHumareNetajiKahein')
+    this.statementService.listStatementService()
       .subscribe((res) => {
         console.log(res);
-        this.statementList = res['humareNetajiKahein'];
-        
+        this.statementList = res.body['humareNetajiKahein'];
+
       });
   }
   deleteStatement(id) {
     var result = confirm("Do you really want to delete?");
     if (result) {
-      this.httpClient.get('http://139.162.53.4/netaji/admin/deleteHumareNetajiKahein?id=' + id)
+      this.statementService.deleteStatementService(id)
         .subscribe((res) => {
           this.toastrService.success('Leader deleted Successfully', 'Success');
           this.getStatements();

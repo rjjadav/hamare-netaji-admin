@@ -31,6 +31,7 @@ import{LeaderListComponent} from './main/leader-list/leader-list.component';
 import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/hamare-netaji-kahen-list.component';
 import { StateService } from './core/services/state.service';
 import { InterviewService } from './core/services/interview.service';
+import { StatementService } from './core/services/statement.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { InterviewService } from './core/services/interview.service';
     AuthGuard,
     UserService,
     StateService,
-    InterviewService
+    InterviewService,
+    StatementService
   ],
   bootstrap: [AppComponent]
 })
