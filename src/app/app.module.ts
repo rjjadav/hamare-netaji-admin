@@ -33,6 +33,7 @@ import { StateService } from './core/services/state.service';
 import { InterviewService } from './core/services/interview.service';
 import { StatementService } from './core/services/statement.service';
 import { PartyService } from './core/services/party.service';
+import { LeaderProfileService } from './core/services/leaderprofile.service';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { PartyService } from './core/services/party.service';
     StateService,
     InterviewService,
     StatementService,
-    PartyService
+    PartyService,
+    LeaderProfileService
   ],
   bootstrap: [AppComponent]
 })

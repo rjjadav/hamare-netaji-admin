@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { error } from 'util';
+import { LeaderProfileService } from '../../core/services/leaderprofile.service';
+
 
 @Component({
   selector: 'app-leader-profile',
@@ -17,6 +19,7 @@ export class LeaderListComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private toastrService: ToastrService,
+    private leaderProfileService: LeaderProfileService
   ) { }
 
   ngOnInit() {
@@ -28,17 +31,17 @@ export class LeaderListComponent implements OnInit {
     let options = {
       'headers': headers
     }*/
-    this.httpClient.get('http://139.162.53.4/netaji/admin/getProfiles')
+    this.leaderProfileService.listLeaderProfileService()
       .subscribe((res) => {
         console.log(res);
-        this.leaderList = res['profiles'];
-        
+        this.leaderList = res.body['profiles'];
+
       });
   }
   deleteLeader(id) {
     var result = confirm("Do you really want to delete?");
     if (result) {
-      this.httpClient.get('http://139.162.53.4/netaji/admin/deleteProfile?id=' + id)
+      this.leaderProfileService.deleteLeaderProfileService(id)
         .subscribe((res) => {
           this.toastrService.success('Leader deleted Successfully', 'Success');
           this.getLeader();
@@ -48,4 +51,4 @@ export class LeaderListComponent implements OnInit {
     }
   }
 }
-  
+

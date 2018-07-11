@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { error } from 'util';
 import { ActivatedRoute } from '@angular/router';
-
+import { LeaderProfileService } from '../../core/services/leaderprofile.service';
 @Component({
   selector: 'app-leader-profile',
   templateUrl: './leader-profile.component.html',
@@ -17,12 +17,13 @@ export class LeaderProfileComponent implements OnInit {
   profileForm: FormGroup;
   idExist = false;
   profileData;
-  uploader: FileUploader = new FileUploader({url: ''});
+  uploader: FileUploader = new FileUploader({ url: '' });
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private leaderProfileService: LeaderProfileService
   ) { }
 
   ngOnInit() {
@@ -54,13 +55,13 @@ export class LeaderProfileComponent implements OnInit {
   getProfile() {
     this.activatedRoute.params.subscribe((params) => {
       if (params['id']) {
-        this.httpClient.get(`http://139.162.53.4/netaji/admin/getProfiles?id=${params['id']}`)
+        this.leaderProfileService.getLeaderProfileByIDService(params['id'])
           .subscribe((res) => {
             console.log(res);
 
-            if (res && res['profiles'].length) {
+            if (res && res.body['profiles'].length) {
               this.idExist = true;
-              this.profileData = res['profiles'][0];
+              this.profileData = res.body['profiles'][0];
               if (this.profileData.profileDetails.posHelds.length > 0) {
                 for (var i = 0; i < this.profileData.profileDetails.posHelds.length; i++) {
                   this.profileData.profileDetails.posHelds[i].from = new Date(this.profileData.profileDetails.posHelds[i].from);
@@ -155,7 +156,7 @@ export class LeaderProfileComponent implements OnInit {
         "active": this.profileData.active
       }
     }
-    this.httpClient.post('http://139.162.53.4/netaji/admin/editProfile', requestOBJ)
+    this.leaderProfileService.editLeaderProfileService(requestOBJ)
       .subscribe((res) => {
         this.toastrService.success('Profile updated Successfully', 'Success');
         this.initProfileForm();
@@ -165,12 +166,12 @@ export class LeaderProfileComponent implements OnInit {
       });
   }
 
-  resetform(){
+  resetform() {
 
   }
 
   createLeader(profileForm) {
-    this.httpClient.post('http://139.162.53.4/netaji/admin/createProfile', profileForm.value)
+    this.leaderProfileService.createLeaderProfileService(profileForm.value)
       .subscribe((res) => {
         // console.log(res);
         this.initProfileForm();
@@ -202,9 +203,9 @@ export class LeaderProfileComponent implements OnInit {
       maritalStatus: [''],
       spouseName: [''],
       dateOfMarriage: [''],
-      noOfChildren: [null,Validators.min(0)],
+      noOfChildren: [null, Validators.min(0)],
       dateOfDeath: [null],
-      noOfCriminalCases: [null,Validators.min(0)],
+      noOfCriminalCases: [null, Validators.min(0)],
       presentAddress: [''],
       presentLandLine: [''],
       // permanentAddress:[],
@@ -242,30 +243,30 @@ export class LeaderProfileComponent implements OnInit {
     return this.profileForm.get('posHelds') as FormArray;
   }
   agecalculate(temp) {
-    if (this.profileForm.value.dob != null){
+    if (this.profileForm.value.dob != null) {
       let dateString = this.profileForm.value.dob.toString();
       let birthYear = new Date(dateString);
       var now = new Date();
-  
+
       var nowMonth = now.getUTCMonth() + 1; //months from 1-12
       var nowDay = now.getUTCDate();
       var nowYear = now.getUTCFullYear();
-  
+
       var myMonth_birth = birthYear.getUTCMonth();
       var myDay_birth = birthYear.getUTCDate();
       var myYear_birth = birthYear.getUTCFullYear();
-  
+
       var birthAge = nowYear - myYear_birth - 1;//not ur age yet
-  
+
       if (nowMonth >= myMonth_birth) //means ur birth month is now or passed
         if (nowDay >= myDay_birth)//check if the day is now or passed
           birthAge += 1;
       const age = this.profileForm.get('age');
       age.setValue(birthAge);
-    }else{
+    } else {
       const age = this.profileForm.get('age');
       age.setValue(0);
-    }   
+    }
   }
   addPosition() {
     this.posHelds.push(this.formBuilder.group({ from: null, to: null, held: '' }));
