@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { InterviewService } from '../../core/services/interview.service';
+
 
 @Component({
   selector: 'app-party-list',
@@ -13,6 +15,7 @@ export class InterviewListComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private toastrService: ToastrService,
+    private interviewService: InterviewService
   ) { }
 
   ngOnInit() {
@@ -24,21 +27,21 @@ export class InterviewListComponent implements OnInit {
     let options = {
       'headers': headers
     }*/
-    this.httpClient.get('http://139.162.53.4/netaji/admin/getInterview')
+    this.interviewService.listInterviewService()
       .subscribe((res) => {
-        this.interviewList = res['interviews'];
+        this.interviewList = res.body['interviews'];
       });
   }
   deleteInterview(id) {
     var result = confirm("Do you really want to delete?");
     if (result) {
-      this.httpClient.get('http://139.162.53.4/netaji/admin/deleteInterview?id='+id)
-      .subscribe((res) => {
-        this.toastrService.success('Interview deleted Successfully', 'Success');
-       this.getInterview();
-      },(error)=>{
-      this.toastrService.error('Failure deleing Interview', 'Failure');
-      });
+      this.interviewService.deleteInterviewService(id)
+        .subscribe((res) => {
+          this.toastrService.success('Interview deleted Successfully', 'Success');
+          this.getInterview();
+        }, (error) => {
+          this.toastrService.error('Failure deleing Interview', 'Failure');
+        });
     }
   }
 }

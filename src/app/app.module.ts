@@ -30,6 +30,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import{LeaderListComponent} from './main/leader-list/leader-list.component';
 import {HamareNetajiKahenListComponent} from './main/hamare-netaji-kahen-list/hamare-netaji-kahen-list.component';
 import { StateService } from './core/services/state.service';
+import { InterviewService } from './core/services/interview.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { StateService } from './core/services/state.service';
     },
     AuthGuard,
     UserService,
-    StateService
+    StateService,
+    InterviewService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {FileUploader} from 'ng2-file-upload';
-import {ActivatedRoute} from '@angular/router';
+import { FileUploader } from 'ng2-file-upload';
+import { ActivatedRoute } from '@angular/router';
+import { InterviewService } from '../../core/services/interview.service';
+
 
 @Component({
   selector: 'app-add-interview',
@@ -12,7 +14,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AddInterviewComponent implements OnInit {
   interviewForm: FormGroup;
-  uploader: FileUploader = new FileUploader({url: ''});
+  uploader: FileUploader = new FileUploader({ url: '' });
   idExist: boolean = false;
   loading: boolean = false;
   interviewData;
@@ -20,7 +22,8 @@ export class AddInterviewComponent implements OnInit {
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private interviewService: InterviewService
   ) { }
 
   ngOnInit() {
@@ -33,7 +36,7 @@ export class AddInterviewComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       // youtubeLink: ['',Validators.compose([Validators.required,Validators.pattern('^(https?://)?(www\\\\.)?([-a-z0-9]{1,63}\\\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\\\.[a-z]{2,6}(/[-\\\\w@\\\\+\\\\.~#\\\\?&/=%]*)?$')])],
-      youtubeLink: ['',Validators.compose([Validators.required,Validators.pattern('^(https?:\/\/)?((w{3}\.)?)youtube.com\/.*$')])],
+      youtubeLink: ['', Validators.compose([Validators.required, Validators.pattern('^(https?:\/\/)?((w{3}\.)?)youtube.com\/.*$')])],
       thumbNailImage: ['', Validators.required],
       sequence: [null, Validators.required],
       active: ['Active', Validators.required]
@@ -44,23 +47,23 @@ export class AddInterviewComponent implements OnInit {
   getInterviewDetails() {
     this.activatedRoute.params.subscribe(params => {
 
-      if(params['id']){
-        this.httpClient.get(`http://139.162.53.4/netaji/admin/getInterview?id=${params['id']}`)
-        .subscribe((res) => {
-          if(res && res['interviews'].length) {
-            this.idExist = true;
-            let data = res['interviews'][0];
-            this.interviewData = data;
-            this.interviewForm.patchValue({
-              title: data.title,
-              description: data.description,
-              youtubeLink: data.youtubeLink,
-              thumbNailImage: data.thumbNailImage,
-              sequence: data.sequence,
-              active: (data.active ? 'Active' : 'Inactive')
-            });
-          }
-        });
+      if (params['id']) {
+        this.interviewService.getInterviewByIDService(params['id'])
+          .subscribe((res) => {
+            if (res && res.body['interviews'].length) {
+              this.idExist = true;
+              let data = res.body['interviews'][0];
+              this.interviewData = data;
+              this.interviewForm.patchValue({
+                title: data.title,
+                description: data.description,
+                youtubeLink: data.youtubeLink,
+                thumbNailImage: data.thumbNailImage,
+                sequence: data.sequence,
+                active: (data.active ? 'Active' : 'Inactive')
+              });
+            }
+          });
       }
     })
   }
@@ -74,20 +77,20 @@ export class AddInterviewComponent implements OnInit {
     } else {
       this.loading = true;
 
-      if(this.idExist) {
+      if (this.idExist) {
         this.updateInterview(interviewForm);
-      }else {
+      } else {
         this.createInterview(interviewForm);
       }
     }
   }
 
   createInterview(interviewForm) {
-    this.httpClient.post('http://139.162.53.4/netaji/admin/addInterview', interviewForm.value)
+    this.interviewService.createInterviewService(interviewForm.value)
       .subscribe((res) => {
         this.toastrService.success('Interview added Successfully', 'Success');
         this.loading = false;
-      },(error)=>{
+      }, (error) => {
         this.toastrService.error('Failure adding Interview', 'Failure');
         this.loading = false;
       });
@@ -98,28 +101,28 @@ export class AddInterviewComponent implements OnInit {
     formValue.id = this.interviewData.id;
     formValue.createdOn = this.interviewData.createdOn;
     formValue.active = interviewForm.value.active.toLowerCase() === 'active';
-    this.httpClient.post('http://139.162.53.4/netaji/admin/editInterview', formValue)
+    this.interviewService.editInterviewService(formValue)
       .subscribe((res) => {
         this.toastrService.success('Interview Updated Successfully', 'Success');
         this.loading = false;
-      },(error)=>{
+      }, (error) => {
         this.toastrService.error('Failure updating Interview', 'Failure');
         this.loading = false;
       });
   }
 
   onFileSelected() {
-    if(this.uploader.queue.length) {
+    if (this.uploader.queue.length) {
       let file = this.uploader.queue[this.uploader.queue.length - 1];
       console.log(file);
       let fileReader = new FileReader();
 
       fileReader.onload = (e) => {
-        let imageData  = fileReader.result;
+        let imageData = fileReader.result;
         // console.log(imageData);
-        if(imageData.length) {
+        if (imageData.length) {
           this.interviewForm.patchValue({
-            thumbNailImage : imageData
+            thumbNailImage: imageData
           })
         }
       }
