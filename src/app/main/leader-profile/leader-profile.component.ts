@@ -42,7 +42,7 @@ export class LeaderProfileComponent implements OnInit {
         // console.log(imageData);
         if (imageData.length) {
           this.profileForm.patchValue({
-            profilePic: imageData.split(',')[1]
+            profilePic: imageData.toString()
           });
         }
       }
